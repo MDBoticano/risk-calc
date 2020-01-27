@@ -1,3 +1,12 @@
+# Risk Calc
+Calculator the outcome of your Risk battles. 
+
+## Goals
+1. Estimate time to develop and deploy an app
+2. Make something that makes me a better Risk player
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
