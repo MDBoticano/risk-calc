@@ -8,6 +8,11 @@ const MAX = 6;
  */
 const orderMinMax = (numA, numB) => {
   const order = numA < numB ? [numA, numB] : [numB, numA];
+
+  // Force integers
+  // order[0] = Math.ceil(order[0]);
+  // order[1] = Math.floor(order[1]);
+
   return order;
 }
 
@@ -18,7 +23,7 @@ const orderMinMax = (numA, numB) => {
  */
 export const rollDice = (min = MIN, max = MAX) => {
   /* In case min is bigger than max, swap */
-  // [min, max] = orderMinMax[min, max];
+  [min, max] = orderMinMax(min, max);
 
   const roll = Math.floor(min + (Math.random() * (max - min + 1)));
   return roll;
