@@ -37,6 +37,27 @@ A roll of dice by an attacker (1 - 3) and a defender (1 or 2). Compare the lowes
 |2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 44.83% <br> 32.41% <br> 22.76% |
 |3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 29.26% <br> 33.58% <br> 37.17% |
 
+### One Battle: Ammo Shortage 
+Defender -1 to highest roll
+|Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
+|:-:|:-:|:-:|:-:|:-:|
+|1|1| 1 <br> -- | -- <br> 1| 41.66% <br> 58.33% |
+|2|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
+|3|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
+|1|2| 1 <br> -- | -- <br> 1| ?? <br> ?? |
+|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
+|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
+
+### One Battle: Fortified
+Defender +1 to highest roll
+|Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
+|:-:|:-:|:-:|:-:|:-:|
+|1|1| 1 <br> -- | -- <br> 1| 72.22% <br> 27.78% |
+|2|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
+|3|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
+|1|2| 1 <br> -- | -- <br> 1| ?? <br> ?? |
+|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
+|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

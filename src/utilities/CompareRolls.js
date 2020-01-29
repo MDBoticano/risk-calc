@@ -48,12 +48,10 @@ const combatRoll = (numAttackers = ATK_ROLLS, numDefenders = DEF_ROLLS) => {
  * @param {*} numToCompare 
  * @returns {[Number, Number]} -- [troops attack loses, troops defense loses]
  */
-const compareRolls = (attackRolls, defendRolls, numToCompare = 2) => {
-  const smallestCompare = attackRolls.length >= defendRolls.length
+const compareRolls = (attackRolls, defendRolls) => {
+  const numToCompare = attackRolls.length >= defendRolls.length
     ? defendRolls.length
     : attackRolls.length
-
-  if (numToCompare > smallestCompare) { numToCompare = smallestCompare };
 
   let [defenseLosses, attackLosses]  = [0, 0];
 
@@ -105,29 +103,8 @@ export const simulateMultipleRounds = (rounds, attackers, defenders ) => {
   // console.log('Average Attacker result:', averageAttack);
   // console.log('Average Defender result:', averageDefense);
   // console.log(`Atk ${averageAttack / -2}:${averageDefense / -2} Def`);
-  // console.log(`Atk ${atkPercent}:${defPercent} Def`);
+  console.log(`Atk ${atkPercent}:${defPercent} Def`);
 }
-
-// /** LOOK AT compareRolls()
-//  * 
-//  * @param {[Number]} atkRolls -- roll results, length 1 - 3
-//  * @param {[Number]} defRolls  -- roll results, length 1 - 2
-//  */
-// const calcRolls = (atkRolls, defRolls) => {
-//   const [numAtk, numDef] = [atkRolls.length, defRolls.length];
-//   const numToCompare = numAtk > numDef ? numDef : numAtk;
-  
-//   const [sortedAtk, sortedDef] = [sortRolls(atkRolls), sortRolls(defRolls)];
-//   console.log('Attack Rolls:', sortedAtk);
-//   console.log('Defense Rolls:', sortedDef);
-
-//   // const bestAtk = [bestRolls(sortedAtk, numToCompare)];
-//   // const bestDef = [bestRolls(sortedDef, numToCompare)];
-
-//   for (let i = 0; i < numToCompare; i++) {
-
-//   }
-// };
 
 /* recursive backtrace via UWash */
 export const getRollPermutations = (numDice, minRoll = 1, maxRoll = 6) => {
@@ -150,15 +127,28 @@ export const getRollPermutations = (numDice, minRoll = 1, maxRoll = 6) => {
   // Recursive back-track helper
   helpDiceRolls(numDice, permutation);
 
-  // console.log('Num allPerms:', allPerms.length);
-  // console.log('allPerms:', allPerms[0], '...', allPerms[allPerms.length - 1]);
+  // console.log('Number of permutations:', allPerms.length);
+  // console.log(`${allPerms[0]} ... ${allPerms[allPerms.length - 1]}`);
 
   return allPerms;
 };
 
-export const calcOdds = (nAtk = 1, nDef = 1, MIN = 1, MAX = 6) => {
+const defaultDice = {
+  diceMin: 1,
+  diceMax: 6,
+  values: [ 1, 2, 3, 4, 5, 6],
+};
 
-  const allCombinations = getRollPermutations(nAtk + nDef, MIN, MAX);
+/**
+ * 
+ * @param {*} nAtk -- number attackers, 1 - 3
+ * @param {*} nDef -- number dependers, 1 - 3
+ * @param {*} dice -- dice max & min
+ * @param {*} modifiers 
+ */
+export const calcOdds = (nAtk = 1, nDef = 1, modifiers) => {
+  const { diceMin, diceMax } = defaultDice;
+  const allCombinations = getRollPermutations(nAtk + nDef, diceMin, diceMax);
   const combinationResults = [];
   let combinationsCount = -1;
 
@@ -170,7 +160,14 @@ export const calcOdds = (nAtk = 1, nDef = 1, MIN = 1, MAX = 6) => {
     const currentCombination = allCombinations[i];
     const atkRolls = sortRolls(currentCombination.slice(0, nAtk));
     const defRolls = sortRolls(currentCombination.slice(nAtk, nAtk + nDef));
-    // const { attackRolls, defenseRolls } = currentCombination;
+
+    if (modifiers.includes("ammoShortage")) {
+      // console.log('ammo shortage: -1 to highest defensive roll');
+      defRolls[0] = defRolls[0] - 1;
+    } else if (modifiers.includes("fortified")) {
+      // console.log('fortified: +1 to highest defensive roll');
+      defRolls[0] = defRolls[0] + 1;
+    }
 
     const combinationResult = compareRolls(atkRolls, defRolls);
     // console.log(`${atkRolls}:${defRolls} ==> ${combinationResult}`);
@@ -192,12 +189,13 @@ export const calcOdds = (nAtk = 1, nDef = 1, MIN = 1, MAX = 6) => {
   // console.log(outcomes);
 
   const odds = {};
-  odds.situation = `${nAtk}Atk v ${nDef}Def`;
-  odds.totalOutcomes = Math.pow(MIN + MAX - 1, nAtk + nDef);
+  odds.situation = `${nAtk}Atk v ${nDef}Def & ${modifiers}`;
+  odds.totalOutcomes = Math.pow(diceMin + diceMax - 1, nAtk + nDef);
   const outcomeKeys = Object.keys(outcomes);
   for (let i = 0; i < outcomeKeys.length; i++) {
-    odds[`${outcomeKeys[i]}(%)`] = (outcomes[outcomeKeys[i]] / 
-      combinationsCount * 100).toFixed(2);
+    odds[`${outcomeKeys[i]}(%)`] = (
+      outcomes[outcomeKeys[i]] / combinationsCount * 100
+    ).toFixed(2);
     odds[outcomeKeys[i]] = outcomes[outcomeKeys[i]];
   }
 
