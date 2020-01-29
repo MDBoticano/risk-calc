@@ -65,23 +65,58 @@ import {
 //   });
 // });
 
-// describe('test calc odds', () => {
-//   test('run calcOdds for default 1v1', () => {
-//     const result = calcOdds();
-//     console.log(result);
-//   });
-// });
-
-describe('list all permutations', () => {
-  // test('roll two dice', () => {
-  //   getRollPermutations(2);
-  // });
-  
-  // test('roll 3 dice, min 1, max 3', () => {
-  //   getRollPermutations(3, 1, 3);
-  // });
-
-  test('roll 5 dice', () => {
-    getRollPermutations(5);
+describe('test calc odds', () => {
+  test('run calcOdds for default 1v1', () => {
+    const result = calcOdds();
+    console.log(result);
   });
+
+  test('run calcOdds for 2v1', () => {
+    const result = calcOdds(2, 1);
+    console.log(result);
+  });
+
+  test('run calcOdds for 3v1', () => {
+    const result = calcOdds(3, 1);
+    console.log(result);
+  });
+
+  test('run calcOdds for 1v2', () => {
+    const result = calcOdds(1, 2);
+    console.log(result);
+  });
+
+  test('run calcOdds for 2v2', () => {
+    const result = calcOdds(2, 2);
+    console.log(result);
+  });
+
+  test('run calcOdds for 3v2', () => {
+    const result = calcOdds(3, 2);
+    console.log(result);
+  });
+
+  // test('run calcOdds for 1atk/1def/dice[1-3]', () => {
+  //   const result = calcOdds(1, 1, 1, 3);
+  //   console.log(result);
+  // });
+
+  // test('run calcOdds for 2atk/1def/dice[1-3]', () => {
+  //   const result = calcOdds(2, 1, 1, 3);
+  //   console.log(result);
+  // });
 });
+
+// describe('list all permutations', () => {
+//   // test('roll two dice', () => {
+//   //   getRollPermutations(2);
+//   // });
+  
+//   // test('roll 3 dice, min 1, max 3', () => {
+//   //   getRollPermutations(3, 1, 3);
+//   // });
+
+//   // test('roll 5 dice', () => {
+//   //   getRollPermutations(5);
+//   // });
+// });

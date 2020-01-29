@@ -49,7 +49,7 @@ const combatRoll = (numAttackers = ATK_ROLLS, numDefenders = DEF_ROLLS) => {
  * @returns {[Number, Number]} -- [troops attack loses, troops defense loses]
  */
 const compareRolls = (attackRolls, defendRolls, numToCompare = 2) => {
-  const smallestCompare = attackRolls.length > defendRolls.length
+  const smallestCompare = attackRolls.length >= defendRolls.length
     ? defendRolls.length
     : attackRolls.length
 
@@ -129,59 +129,6 @@ export const simulateMultipleRounds = (rounds, attackers, defenders ) => {
 //   }
 // };
 
-export const calcOdds = (nAtk = 1, nDef = 1) => {
-  const [MIN, MAX] = [1, 6];
-
-  const allCombinations = [];
-  const combinationResults = [];
-  let combinationsCount = -1;
-
-  for (let a = MIN; a <= MAX; a++) {
-    for (let d = MIN; d <= MAX; d++) {
-      const newCombination = {
-        attackRolls: [],
-        defenseRolls: [],
-      };
-      newCombination.attackRolls.push(a);
-      newCombination.defenseRolls.push(d);
-      allCombinations.push(newCombination);
-    }
-  }
-  combinationsCount = allCombinations.length;
-
-  for (let i = 0; i < combinationsCount; i++) {
-    const currentCombination = allCombinations[i];
-    const { attackRolls, defenseRolls } = currentCombination;
-
-    const combinationResult = compareRolls(attackRolls, defenseRolls);
-    // console.log(`${attackRolls}:${defenseRolls} ==> ${combinationResult}`);
-    combinationResults.push(combinationResult);
-  }
-
-  const outcomes = {};
-  for (let i = 0; i < combinationsCount; i++) {
-    const atkLosses = combinationResults[i][0];
-    const defLosses = combinationResults[i][1];
-    const outcomeKey = `ATK_-${atkLosses}:DEF_-${defLosses}`;
-
-    if(!outcomes[outcomeKey]) {
-      outcomes[outcomeKey] = 1;
-    } else {
-      outcomes[outcomeKey] += 1;
-    }
-  }
-  // console.log(outcomes);
-
-  const odds = {};
-  const outcomeKeys = Object.keys(outcomes);
-  for (let i = 0; i < outcomeKeys.length; i++) {
-    odds[outcomeKeys[i]] = outcomes[outcomeKeys[i]] / combinationsCount;
-  }
-
-  // console.log(odds);
-  return odds;
-};
-
 /* recursive backtrace via UWash */
 export const getRollPermutations = (numDice, minRoll = 1, maxRoll = 6) => {
   const allPerms = [];
@@ -203,10 +150,57 @@ export const getRollPermutations = (numDice, minRoll = 1, maxRoll = 6) => {
   // Recursive back-track helper
   helpDiceRolls(numDice, permutation);
 
-  console.log('Num allPerms:', allPerms.length);
-  console.log('allPerms:', allPerms[0], '...', allPerms[allPerms.length - 1]);
+  // console.log('Num allPerms:', allPerms.length);
+  // console.log('allPerms:', allPerms[0], '...', allPerms[allPerms.length - 1]);
 
   return allPerms;
 };
 
+export const calcOdds = (nAtk = 1, nDef = 1, MIN = 1, MAX = 6) => {
 
+  const allCombinations = getRollPermutations(nAtk + nDef, MIN, MAX);
+  const combinationResults = [];
+  let combinationsCount = -1;
+
+  
+  combinationsCount = allCombinations.length;
+  // console.log(`${nAtk}v${nDef}: ${combinationsCount}`);
+
+  for (let i = 0; i < combinationsCount; i++) {
+    const currentCombination = allCombinations[i];
+    const atkRolls = sortRolls(currentCombination.slice(0, nAtk));
+    const defRolls = sortRolls(currentCombination.slice(nAtk, nAtk + nDef));
+    // const { attackRolls, defenseRolls } = currentCombination;
+
+    const combinationResult = compareRolls(atkRolls, defRolls);
+    // console.log(`${atkRolls}:${defRolls} ==> ${combinationResult}`);
+    combinationResults.push(combinationResult);
+  }
+
+  const outcomes = {};
+  for (let i = 0; i < combinationsCount; i++) {
+    const atkLosses = combinationResults[i][0];
+    const defLosses = combinationResults[i][1];
+    const outcomeKey = `ATK_-${atkLosses}:DEF_-${defLosses}`;
+
+    if(!outcomes[outcomeKey]) {
+      outcomes[outcomeKey] = 1;
+    } else {
+      outcomes[outcomeKey] += 1;
+    }
+  }
+  // console.log(outcomes);
+
+  const odds = {};
+  odds.situation = `${nAtk}Atk v ${nDef}Def`;
+  odds.totalOutcomes = Math.pow(MIN + MAX - 1, nAtk + nDef);
+  const outcomeKeys = Object.keys(outcomes);
+  for (let i = 0; i < outcomeKeys.length; i++) {
+    odds[`${outcomeKeys[i]}(%)`] = (outcomes[outcomeKeys[i]] / 
+      combinationsCount * 100).toFixed(2);
+    odds[outcomeKeys[i]] = outcomes[outcomeKeys[i]];
+  }
+
+  // console.log(odds);
+  return odds;
+};
