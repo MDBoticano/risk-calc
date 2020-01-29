@@ -5,6 +5,38 @@ Calculator the outcome of your Risk battles.
 1. Estimate time to develop and deploy an app
 2. Make something that makes me a better Risk player
 
+## Terminology
+### Attacker
+Player looking to attack units in another territory. They must leave at least one troop in the territory they are attacking from. 
+
+If the territory you're attacking from has...
+- 4+ troops: attack with 1 - 3 troops 
+- 3 troops: attack with 1 - 2 troops
+- 2 troops: attack with 1 troop
+- 1 troop: you cannot attack
+
+### Defender
+Player being attacked. Defends a territory. They can defend with all the units in the territory.
+
+If the territory you're defending from has...
+- 2+ troops: defend with 1 - 2 troops
+- 1 troop: defend with 1 troop
+
+### Battle
+A roll of dice by an attacker (1 - 3) and a defender (1 or 2). Compare the lowest # of dice, sorted from highest to lowest. The number of dice compared is the lower number of attacking troops and defending troops. 
+
+## Scenarios
+
+### One Battle
+|Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
+|:-:|:-:|:-:|:-:|:-:|
+|1|1| 1 <br> -- | -- <br> 1| ?? <br> ??|
+|2|1| 1 <br> -- | -- <br> 1| ?? <br> ??|
+|3|1| 1 <br> -- | -- <br> 1| ?? <br> ??|
+|1|2| 1 <br> -- | -- <br> 1| ?? <br> ??|
+|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ??|
+|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ??|
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
