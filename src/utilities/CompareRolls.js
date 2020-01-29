@@ -181,3 +181,32 @@ export const calcOdds = (nAtk = 1, nDef = 1) => {
   // console.log(odds);
   return odds;
 };
+
+/* recursive backtrace via UWash */
+export const getRollPermutations = (numDice, minRoll = 1, maxRoll = 6) => {
+  const allPerms = [];
+  const permutation = [];
+
+  const helpDiceRolls = (numDice, permutation) => {
+    if (numDice === 0) {
+      allPerms.push([...permutation]);
+    } else {
+      for (let i = minRoll; i <= maxRoll; i++) {
+        permutation.push(i); // push value into current permutation
+        // console.log(permutation);
+        helpDiceRolls(numDice - 1, permutation); // recurse call to remainder values
+        permutation.pop(); // remove last element
+      }
+    }
+  }
+
+  // Recursive back-track helper
+  helpDiceRolls(numDice, permutation);
+
+  console.log('Num allPerms:', allPerms.length);
+  console.log('allPerms:', allPerms[0], '...', allPerms[allPerms.length - 1]);
+
+  return allPerms;
+};
+
+

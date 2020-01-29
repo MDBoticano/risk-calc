@@ -3,6 +3,7 @@ import {
 } from './DiceRoll';
 
 import {
+  getRollPermutations,
   sortRolls,
   bestRolls,
   simulateRound,
@@ -64,9 +65,23 @@ import {
 //   });
 // });
 
-describe('test calc odds', () => {
-  test('run calcOdds for default 1v1', () => {
-    const result = calcOdds();
-    console.log(result);
+// describe('test calc odds', () => {
+//   test('run calcOdds for default 1v1', () => {
+//     const result = calcOdds();
+//     console.log(result);
+//   });
+// });
+
+describe('list all permutations', () => {
+  // test('roll two dice', () => {
+  //   getRollPermutations(2);
+  // });
+  
+  // test('roll 3 dice, min 1, max 3', () => {
+  //   getRollPermutations(3, 1, 3);
+  // });
+
+  test('roll 5 dice', () => {
+    getRollPermutations(5);
   });
 });
