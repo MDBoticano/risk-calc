@@ -30,7 +30,7 @@ A roll of dice by an attacker (1 - 3) and a defender (1 or 2). Compare the lowes
 ### One Battle
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
-|1|1| 1 <br> -- | -- <br> 1| ?? <br> ??|
+|1|1| 1 <br> -- | -- <br> 1| 58.33% <br> 41.66% |
 |2|1| 1 <br> -- | -- <br> 1| ?? <br> ??|
 |3|1| 1 <br> -- | -- <br> 1| ?? <br> ??|
 |1|2| 1 <br> -- | -- <br> 1| ?? <br> ??|
