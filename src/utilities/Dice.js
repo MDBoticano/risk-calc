@@ -3,12 +3,6 @@ import {
 } from './Probabilities';
 
 
-export const DICE_DEFAULT = {
-  MIN: 1,
-  MAX: 6,
-  VALUES: [1, 2, 3, 4, 5, 6],
-};
-
 /* Utilities */
 export const sortAscending = (array) => {
   const sorted = array.sort((a, b) => a - b);
@@ -20,6 +14,17 @@ export const sortDescending = (array) => {
   return sorted;
 };
 
+/* Dice Object */
+class Dice {
+  constructor(values) {
+    this.VALUES = values;
+  }
+
+  get min() { return sortAscending(this.VALUES)[0]};
+  get max() { return sortDescending(this.VALUES)[0]};
+};
+
+export const DICE_DEFAULT = new Dice([1, 2, 3, 4, 5, 6]);
 
 /* Dice functions */
 const getRandomNumInclusive = (min = 0, max = 1) => {
@@ -52,13 +57,16 @@ export const rollMultipleDice = (numDice = 1, min, max) => {
   return rolls;
 };
 
-export const getDicePermutations = (diceValues = DICE_DEFAULT.VALUES, 
-  numChoices = 1
-) => {
+/**
+ * Retrieve all possible permutations for a number of dice rolls
+ * @param {[]} diceValues -- possible outcomes from dice. Generally a number.
+ * @param {Number} numChoices -- number of individual outcomes to collect
+ */
+export const getDicePermutations = (diceValues = DICE_DEFAULT.VALUES, numChoices = 1) => {
   if (typeof diceValues === 'number') {
     [diceValues, numChoices] = [DICE_DEFAULT.VALUES, diceValues]
   }
 
   const dicePermutations = getPermutations(diceValues, numChoices);
   return dicePermutations;
-}
+};

@@ -37,5 +37,7 @@ export const getPermutations = (values, numChoices) => {
   generatePermutation(numChoices, currentPermutation);
 
   return permutations;
-}
+};
+
+
 
