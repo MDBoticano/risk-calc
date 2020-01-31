@@ -30,19 +30,19 @@ A roll of dice by an attacker (1 - 3) and a defender (1 or 2). Compare the lowes
 ### One Battle
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
-|1|1| 1 <br> -- | -- <br> 1| 58.33% <br> 41.66% |
+|1|1| 1 <br> -- | -- <br> 1| 58.33% <br> 41.67% |
 |2|1| 1 <br> -- | -- <br> 1| 42.13% <br> 57.87% |
 |3|1| 1 <br> -- | -- <br> 1| 34.03% <br> 65.97% |
 |1|2| 1 <br> -- | -- <br> 1| 74.54% <br> 25.46% |
 |2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 44.83% <br> 32.41% <br> 22.76% |
-|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 29.26% <br> 33.58% <br> 37.17% |
+|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 29.26% <br> 33.58% <br> 37.16% |
 
 ### One Battle: Ammo Shortage 
 Defender removes 1 from their highest roll
 
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
-|1|1| 1 <br> -- | -- <br> 1| 41.66% <br> 58.33% |
+|1|1| 1 <br> -- | -- <br> 1| 41.67% <br> 58.33% |
 |2|1| 1 <br> -- | -- <br> 1| 25.46% <br> 74.54% |
 |3|1| 1 <br> -- | -- <br> 1| 17.36% <br> 82.64% |
 |1|2| 1 <br> -- | -- <br> 1| 57.87% <br> 42.13% |
@@ -55,7 +55,7 @@ Defender adds 1 to their highest roll
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
 |1|1| 1 <br> -- | -- <br> 1| 72.22% <br> 27.78% |
-|2|1| 1 <br> -- | -- <br> 1| 58.33% <br> 41.66% |
+|2|1| 1 <br> -- | -- <br> 1| 58.33% <br> 41.67% |
 |3|1| 1 <br> -- | -- <br> 1| 50.62% <br> 49.38% |
 |1|2| 1 <br> -- | -- <br> 1| 86.11% <br> 13.89% |
 |2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 53.32% <br> 32.02% <br> 14.66% |
