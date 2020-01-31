@@ -42,13 +42,18 @@ describe('list odds for modified rolls', () => {
   //   console.log(result);
   // });
 
-  // test('run calcBattleOdds for 1v1 but fortified', () => {
-  //   const result = calcBattleOdds(1, 1, { defender: "fortified" });
-  //   console.log(result);
-  // });
+  test('run calcBattleOdds for 1v1 but bunkered', () => {
+    const result = calcBattleOdds(1, 1, { defender: "bunker" });
+    console.log(result);
+  });
 
-  test('run calcBattleOdds for an invalid modifier', () => {
-    const result = calcBattleOdds(1, 1, { idkerr: "fortified" });
+  test('run calcBattleOdds for an invalid modifier property', () => {
+    const result = calcBattleOdds(1, 1, { idkerr: "bunker" });
+    console.log(result);
+  });
+
+  test('run calcBattleOdds for an invalid modifier value', () => {
+    const result = calcBattleOdds(1, 1, { defender: "banker" });
     console.log(result);
   });
 });

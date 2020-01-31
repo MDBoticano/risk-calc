@@ -72,8 +72,8 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
     if (defender === 'ammoShortage') {
       // console.log('ammo shortage: -1 to highest defensive roll');
       defRolls[0] = defRolls[0] - 1;
-    } else if (defender === 'fortified') {
-      // console.log('fortified: +1 to highest defensive roll');
+    } else if (defender === 'bunker') {
+      // console.log('bunker: +1 to highest defensive roll');
       defRolls[0] = defRolls[0] + 1;
     }
 

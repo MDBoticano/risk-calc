@@ -1,5 +1,5 @@
 # Risk Calc
-Calculator the outcome of your Risk battles. 
+Calculate the outcome of your Risk battles. 
 
 ## Goals
 1. Estimate time to develop and deploy an app
@@ -38,7 +38,8 @@ A roll of dice by an attacker (1 - 3) and a defender (1 or 2). Compare the lowes
 |3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 29.26% <br> 33.58% <br> 37.17% |
 
 ### One Battle: Ammo Shortage 
-Defender -1 to highest roll
+Defender removes 1 from their highest roll
+
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
 |1|1| 1 <br> -- | -- <br> 1| 41.66% <br> 58.33% |
@@ -48,8 +49,9 @@ Defender -1 to highest roll
 |2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
 |3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
 
-### One Battle: Fortified
-Defender +1 to highest roll
+### One Battle: Bunker
+Defender adds 1 to their highest roll
+
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
 |1|1| 1 <br> -- | -- <br> 1| 72.22% <br> 27.78% |
