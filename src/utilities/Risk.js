@@ -86,7 +86,7 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
   for (let i = 0; i < permutationsCount; i++) {
     const atkLosses = combinationResults[i][0];
     const defLosses = combinationResults[i][1];
-    const outcomeKey = `ATK_-${atkLosses}:DEF_-${defLosses}`;
+    const outcomeKey = `ATK -${atkLosses}, DEF -${defLosses}`;
 
     if(!outcomes[outcomeKey]) {
       outcomes[outcomeKey] = 1;
@@ -97,16 +97,16 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
   // console.log(outcomes);
 
   const odds = {};
-  odds.situation = `${nAtk}Atk v ${nDef}Def & ${modifiers}`;
+  odds.situation = `${nAtk}Atk v ${nDef}Def`;
+  odds.modifiers = `${modifiers.defender} ${modifiers.attacker}`;
   odds.totalOutcomes = Math.pow(dice.min + dice.max - 1, nAtk + nDef);
   const outcomeKeys = Object.keys(outcomes);
   for (let i = 0; i < outcomeKeys.length; i++) {
-    odds[`${outcomeKeys[i]}(%)`] = (
+    const outcomePercent =  (
       outcomes[outcomeKeys[i]] / permutationsCount * 100
     ).toFixed(2);
-    odds[outcomeKeys[i]] = outcomes[outcomeKeys[i]];
+    odds[outcomeKeys[i]] = `${outcomePercent} (${outcomes[outcomeKeys[i]]})`;
   }
-
   // console.log(odds);
   return odds;
 };

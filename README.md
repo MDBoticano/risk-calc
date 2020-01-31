@@ -43,11 +43,11 @@ Defender removes 1 from their highest roll
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
 |1|1| 1 <br> -- | -- <br> 1| 41.66% <br> 58.33% |
-|2|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
-|3|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
-|1|2| 1 <br> -- | -- <br> 1| ?? <br> ?? |
-|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
-|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
+|2|1| 1 <br> -- | -- <br> 1| 25.46% <br> 74.54% |
+|3|1| 1 <br> -- | -- <br> 1| 17.36% <br> 82.64% |
+|1|2| 1 <br> -- | -- <br> 1| 57.87% <br> 42.13% |
+|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 31.25% <br> 37.50% <br> 31.25% |
+|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 18.38% <br> 30.57% <br> 51.05% |
 
 ### One Battle: Bunker
 Defender adds 1 to their highest roll
@@ -55,11 +55,11 @@ Defender adds 1 to their highest roll
 |Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
 |:-:|:-:|:-:|:-:|:-:|
 |1|1| 1 <br> -- | -- <br> 1| 72.22% <br> 27.78% |
-|2|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
-|3|1| 1 <br> -- | -- <br> 1| ?? <br> ?? |
-|1|2| 1 <br> -- | -- <br> 1| ?? <br> ?? |
-|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
-|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | ?? <br> ?? <br> ?? |
+|2|1| 1 <br> -- | -- <br> 1| 58.33% <br> 41.66% |
+|3|1| 1 <br> -- | -- <br> 1| 50.62% <br> 49.38% |
+|1|2| 1 <br> -- | -- <br> 1| 86.11% <br> 13.89% |
+|2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 53.32% <br> 32.02% <br> 14.66% |
+|3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 35.24% <br> 40.84% <br> 23.92% |
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
