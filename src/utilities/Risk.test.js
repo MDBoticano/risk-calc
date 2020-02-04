@@ -49,28 +49,28 @@ import {
 // });
 
 describe('list odds for modified rolls', () => {
-  describe('test modifiers', () => {
+  // describe('test modifiers', () => {
 
-    test('create default modifier', () => {
-      const modifier = new Modifiers();
-      console.log(modifier);
-    });
+  //   // test('create default modifier', () => {
+  //   //   const modifier = new Modifiers();
+  //   //   console.log(modifier);
+  //   // });
       
-    test('create modifiers', () => {
-      const modifier = new Modifiers({ defender: 'aaa' });
-      console.log(modifier);
-    });
+  //   // test('create modifiers', () => {
+  //   //   const modifier = new Modifiers({ defender: 'aaa' });
+  //   //   console.log(modifier);
+  //   // });
       
-    test('run calcBattleOdds for an invalid modifier property', () => {
-      const result = calcBattleOdds(1, 1, { idkerr: "bunker" });
-      console.log(result);
-    });
+  //   // test('run calcBattleOdds for an invalid modifier property', () => {
+  //   //   const result = calcBattleOdds(1, 1, { idkerr: "bunker" });
+  //   //   console.log(result); // should be default 1v1 odds
+  //   // });
         
-    test('run calcBattleOdds for an invalid modifier value', () => {
-      const result = calcBattleOdds(1, 1, { defender: "banker" });
-      console.log(result);
-    });
-  });
+  //   // test('run calcBattleOdds for an invalid modifier value', () => {
+  //   //   const result = calcBattleOdds(1, 1, { defender: "banker" });
+  //   //   console.log(result); // should be default 1v1 odds
+  //   // });
+  // });
 
   // test('run calcBattleOdds for default 1v1', () => {
   //   const result = calcBattleOdds();
@@ -136,4 +136,19 @@ describe('list odds for modified rolls', () => {
   //   const result = calcBattleOdds(3, 2, { defender: "bunker" });
   //   console.log(result);
   // });
+
+  test('run calcBattleOdds for default 1v1 but enclave attacker', () => {
+    const result = calcBattleOdds(1, 1, { attacker: "enclave" });
+    console.log(result); // first check (num attackers) fails, default result
+  });
+
+  test('run calcBattleOdds for 3v1 but enclave attacker', () => {
+    const result = calcBattleOdds(3, 1, { attacker: "enclave" });
+    console.log(result); // first check (num attackers) passes
+  });
+
+  test('run calcBattleOdds for default 3v2 but enclave attacker', () => {
+    const result = calcBattleOdds(3, 2, { attacker: "enclave" });
+    console.log(result); // first check (num attackers) passes
+  });
 });

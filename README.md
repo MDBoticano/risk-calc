@@ -60,6 +60,14 @@ Defender adds 1 to their highest roll
 |1|2| 1 <br> -- | -- <br> 1| 86.11% <br> 13.89% |
 |2|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 53.32% <br> 32.02% <br> 14.66% |
 |3|2| 2 <br> 1 <br> -- | -- <br> 1 <br> 2 | 35.24% <br> 40.84% <br> 23.92% |
+
+### One Battle: Enclave
+If the attacker is Enclave of the Bear and they roll three dice which results in at least one defending troop dying, remove all remaining troops from the defending territory. Doesn't account for [missle modification](https://boardgamegeek.com/thread/722214/article/7817831#7817831).
+
+|Atk|Def|Losses<sub>atk|Losses<sub>def|Probability|
+|:-:|:-:|:-:|:-:|:-:|
+|3|1| 1 <br> -- <br> -- | -- <br> 1 <br> ALL | 34.03% <br> 64.81% <br> 1.16% |
+|3|2| 2 <br> 1 <br> -- <br> -- | -- <br> 1 <br> 2 <br> ALL | 29.26% <br> 32.68% <br> 36.46% <br> 1.60% |
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

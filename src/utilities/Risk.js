@@ -37,8 +37,38 @@ const compareRolls = (attackerRolls, defenderRolls) => {
   return [attackLosses, defenseLosses];
 }
 
-
-
+/**
+ * Compare dice rolls specifically in enclave condition
+ * @param {[Number]} attackerRolls -- rolls by attacker
+ * @param {[Number]} defenderRolls -- rolls by defender
+ * @returns {[Number]} -- [0] is attack troops lost, [1] is defense troops lost
+ */
+const enclaveCompareRolls = (attackerRolls, defenderRolls) => {
+  const [numAtk, numDef ] = [attackerRolls.length, defenderRolls.length];
+  
+  // if there are three attack dice
+  // and if the three numbers are the same (e.g. 5,5,5 or 3,3,3)
+  // and if that number is bigger than the lowest of defender
+  // OBLITERATE
+  // enclave ability check
+  if (
+    numAtk === 3
+    && attackerRolls[0] === attackerRolls[1]
+    && attackerRolls[1] === attackerRolls[2]
+    && attackerRolls[0] > defenderRolls[numDef - 1])
+  {
+    // console.log('OBLITERATE'); // interact with actual troop counter
+    /**
+     * add 100 just so we get a clearly different outcome. However this messes
+     * up average loss since it doesn't know the normal troops, so change this
+     * later
+     */ 
+    return [0, numDef + 100]; 
+  } else {
+    // just do a regular comparison
+    return compareRolls(attackerRolls, defenderRolls);
+  }
+}
 
 /**
  * calculate battle outcome probabilities
@@ -57,7 +87,7 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
     }
   }
 
-  const { dice, defender } = modifiers;
+  const { dice, defender, attacker } = modifiers;
 
   const dicePermutations = getDicePermutations(dice.VALUES, nAtk + nDef);
   const permutationsCount = dicePermutations.length;
@@ -75,6 +105,17 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
     } else if (defender === 'bunker') {
       // console.log('bunker: +1 to highest defensive roll');
       defRolls[0] = defRolls[0] + 1;
+    }
+
+    if (attacker === 'enclave') {
+
+      const result = enclaveCompareRolls(atkRolls, defRolls);
+      // console.log('Enclave result:', result);
+      combinationResults.push(result);
+
+      continue; // don't do the regular compare, just go to next permutation
+
+      // expect to have a slightly better percentage than unmodified comparison
     }
 
     const combinationResult = compareRolls(atkRolls, defRolls);
@@ -98,7 +139,8 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
 
   const odds = {};
   odds.situation = `${nAtk}Atk v ${nDef}Def`;
-  odds.modifiers = `${modifiers.defender} ${modifiers.attacker}`;
+  // odds.modifiers = `${modifiers.defender} ${modifiers.attacker}`;
+  odds.modifiers = modifiers;
   // odds.totalOutcomes = Math.pow(dice.min + dice.max - 1, nAtk + nDef);
   const outcomeKeys = Object.keys(outcomes);
   for (let i = 0; i < outcomeKeys.length; i++) {
