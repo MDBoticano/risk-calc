@@ -16,6 +16,13 @@ export const RollNode = class {
 
   get nAttackers () { return this.rollPair[0] };
   get nDefenders () { return this.rollPair[1] };
+
+  // calculate probabilities: child to parent
+  // Q: calculate from within or pass as a calculated value when creating node? 
+  // Or maybe make it part of loseTroops. So rollPair will be three values:
+  // 1. total number of attackers (can be greater than 3)
+  // 2. total number of defenders (can be greater than 2)
+  // 3. probability relative to parent
 }
 
 export const createTree = (parentNode) => {
@@ -36,6 +43,7 @@ export const createTree = (parentNode) => {
   for (let i = 0; i < children.length; i++) {
     // turn child into a node
     const newNode = new RollNode(children[i]);
+    newNode.parent = parentNode;
 
     // CREATE tree from children
     const childTree = createTree(newNode);

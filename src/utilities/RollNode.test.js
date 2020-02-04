@@ -18,6 +18,7 @@ describe('RollNode class', () => {
   test('create a tree from a non-terminating node', () => {
     const nonTerminatingNode = new RollNode([1, 1]);
     const newTree = createTree(nonTerminatingNode);
-    console.log(newTree);
+    // console.log(newTree);
+    console.log(newTree.children[0]);
   });
 });
