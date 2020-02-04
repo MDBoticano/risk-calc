@@ -20,3 +20,8 @@ describe('test error conditions:', () => {
     expect(() => pairOutcomes(pairArg)).toThrowError();
   });
 });
+
+describe('test intended conditions', () => {
+  const result = pairOutcomes([3, 2]);
+  console.log(result);
+});

@@ -1,4 +1,4 @@
-const loseTroops = (attackers, defenders, troopsLost = 2) => {
+export const loseTroops = (attackers, defenders, troopsLost = 2) => {
   const outcomes = [
     [attackers - troopsLost, defenders],
     [attackers, defenders - troopsLost],
