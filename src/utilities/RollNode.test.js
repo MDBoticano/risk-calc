@@ -51,9 +51,17 @@ describe('RollNode class', () => {
   describe('RollNode methods', () => {
     test('depth of a newNode with no parent is 0', () => {
       const newNode = new RollNode([1,1]);
-      const nodeDepth = newNode.depth;
-      expect(nodeDepth).toBe(0);
+      expect(newNode.depth).toBe(0);
+      expect(newNode.root).toBe(newNode);
       expect(newNode.isLeaf()).toBe(true);
+    });
+
+    test('the root of a depth 1 node is the depth 0 node', () => {
+      const newNode = new RollNode([1,1]);
+      createTree(newNode);
+      console.log(newNode);
+      expect(newNode.children[0].depth).toBe(1);
+
     });
   });
 });

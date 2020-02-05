@@ -22,9 +22,7 @@ export const RollNode = class {
     this.rollPair = rollPair;
   }
 
-  // Getters & Setters (properties) //
-  // set parent (parentNode) { this.parent = parentNode };
-
+  // --------------------- Getters/Setters (properties) --------------------- //
   get nAttackers () { return this.rollPair[0]; };
   get nDefenders () { return this.rollPair[1]; };
 
@@ -35,31 +33,46 @@ export const RollNode = class {
   // 2. total number of defenders (can be greater than 2)
   // 3. probability relative to parent
 
-  // TODO: calculate depth (levels of children). no children is depth 1.
   /**
-   * The depth of a node is the distance from it to the parent node. A node with
-   * no parent has a depth of zero.
+   * The depth of a node is the number of edges from it to the root node. For
+   * each parent including the root node, increase node depth by 1. 
+   * @return {number} nodeDepth: any positive integer including 0
    */
   get depth () {
-    // no parent: depth 0
-    if (this.parent === null) {
-      return 0;
-    } else {
-      // move up the tree until you hit a parent node with no parent
-      return -1;
-    }
+    const getDepth = (node, depth = 0) => {
+      if (node.parent === null) { return depth; } // base case no parent
+      else { return getDepth(node.parent, depth + 1); } // recursive case
+    };
+    const nodeDepth = getDepth(this);
+    return nodeDepth;
   };
 
-  // traverse up to tree until there's parent is null, which is the root node
-  get root () { }
+  /**
+   * The root node of a tree is the top-most node, that is, it has no parent.
+   * Find the root by checking for parent nodes.
+   * @return {RollNode} rootNode: return a RollNode
+   */
+  get root () {
+    const getRoot = (node) => { 
+      if (node.parent === null) { return node; } // base case: no parent
+      else { return getRoot(node.parent); } // recursive case: check parent
+    };
+    const rootNode = getRoot(this);
+    return rootNode;
+  };
 
-  // Methods //
-
-  // Add a RollNode to a node's children array
+  // ------------------------------- Methods ------------------------------- //
+  /**
+   * Add a RollNode to the end of the RollNode's children array
+   * @param {RollNode} childNode -- node to add to children
+   */
   addChild (childNode) { this.children.push(childNode); };
 
-  // leaf if no children
-  // is it still a leaf if it has no parent either?
+  /**
+   * Check if the node is a leaf node (has no children)
+   * Q: is it still a leaf if it has no parent either?
+   * @return {boolean}
+   */
   isLeaf () { return this.children.length === 0 ? true : false; };
 
 

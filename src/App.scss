@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.rollNode-tree {
+  margin: .5rem;
+  padding: 2rem;
+  border: solid 1px black;
+}
+
+.node-children {
+  display: grid;
+
+  &-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  &-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: center;
+}
+
+.node {
+  // display: block;
+  // width: 2rem;
+  padding: 1rem;
+}
