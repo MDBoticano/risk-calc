@@ -22,10 +22,8 @@ export const RollNode = class {
     this.rollPair = rollPair;
   }
 
-  // Methods //
+  // Getters & Setters (properties) //
   // set parent (parentNode) { this.parent = parentNode };
-
-  addChild (childNode) { this.children.push(childNode); };
 
   get nAttackers () { return this.rollPair[0]; };
   get nDefenders () { return this.rollPair[1]; };
@@ -38,9 +36,36 @@ export const RollNode = class {
   // 3. probability relative to parent
 
   // TODO: calculate depth (levels of children). no children is depth 1.
+  /**
+   * The depth of a node is the distance from it to the parent node. A node with
+   * no parent has a depth of zero.
+   */
+  get depth () {
+    // no parent: depth 0
+    if (this.parent === null) {
+      return 0;
+    } else {
+      // move up the tree until you hit a parent node with no parent
+      return -1;
+    }
+  };
+
+  // traverse up to tree until there's parent is null, which is the root node
+  get root () { }
+
+  // Methods //
+
+  // Add a RollNode to a node's children array
+  addChild (childNode) { this.children.push(childNode); };
+
+  // leaf if no children
+  // is it still a leaf if it has no parent either?
+  isLeaf () { return this.children.length === 0 ? true : false; };
+
+
   
   // TODO: calculate total number of nodes 
-}
+};
 
 /**
  * Create a tree of all possible outcomes
