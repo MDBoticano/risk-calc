@@ -56,8 +56,8 @@ describe('RollNode class', () => {
 
 
   describe('RollNode methods', () => {
-    // describe('a new node...', () => {
-    //   const newNode = new RollNode([1,1]);
+    describe('a new node...', () => {
+      const newNode = new RollNode([1,1]);
       
     //   test('has a depth of 0', () => {
     //     expect(newNode.depth).toBe(0);
@@ -72,10 +72,10 @@ describe('RollNode class', () => {
     //     expect(newNode.isLeaf()).toBe(true);
     //   });
 
-    //   test('has a probability of 1.00', () => {
-    //     expect(newNode.probabilityParent).toBe(1);
-    //   });
-    // });
+      test('has a probability of 1.00', () => {
+        expect(newNode.getRelativeProbability()).toBe(1);
+      });
+    });
 
     // test('the root of a depth 1 node is the depth 0 node', () => {
     //   const newNode = new RollNode([1,1]);

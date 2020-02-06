@@ -67,15 +67,13 @@ export const RollNode = class {
     return lossFromParent;
   };
 
-
-  // ----- probability helpers ---- //
-
+  // ------------------------------- Methods ------------------------------- //
   /**
    * Get probability of rollPair based on parent's rollPair
    * @return {number} probability - probability out of 100% (1.00); for a
    * specific fraction, use odds instead. 
    */
-  get probabilityParent () {
+  getRelativeProbability (modifiers) {
     if (this.isRoot()) { return 1.00; } // base: node isRoot
 
     // get battle roll from parent
@@ -86,7 +84,12 @@ export const RollNode = class {
     return -1;
   }
 
-  // ------------------------------- Methods ------------------------------- //
+  // like relative probability, but multiple by all probabilities from this to
+  // root
+  getRootProbability (modifiers) {
+
+  }
+
   /**
    * Add a RollNode to the end of the RollNode's children array
    * @param {RollNode} childNode -- node to add to children
