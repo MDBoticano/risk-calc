@@ -10,8 +10,13 @@ export const RollNode = class {
   }
 
   // --------------------- Getters/Setters (properties) --------------------- //
+  // Number of total troops on the territory that can attack or defend
   get nAttackers () { return this.rollPair[0]; };
   get nDefenders () { return this.rollPair[1]; };
+
+  // Number of troops in attacker's best-case scenario battle
+  get battleAttackers () { return this.nAttackers >= 3 ? 3 : this.nAttackers; };
+  get battleDefenders () { return this.nDefenders >= 2 ? 2 : this.nDefenders; };
 
   // TODO: calculate probabilities: child to parent
   // Q: calculate from within or pass as a calculated value when creating node? 
@@ -48,6 +53,39 @@ export const RollNode = class {
     return rootNode;
   };
 
+  /**
+   * Compare this rollPair to parent rollPair to see where troops were lost
+   * @return {[number]} [attackers lost, defenders lost]
+   */
+  get lossFromParent () {
+    if (this.parent === null) { return [0, 0]; }
+
+    const lossFromParent = [
+      this.parent.nAttackers - this.nAttackers,
+      this.parent.nDefenders - this.nDefenders,
+    ];
+    return lossFromParent;
+  };
+
+
+  // ----- probability helpers ---- //
+
+  /**
+   * Get probability of rollPair based on parent's rollPair
+   * @return {number} probability - probability out of 100% (1.00); for a
+   * specific fraction, use odds instead. 
+   */
+  get probabilityParent () {
+    if (this.isRoot()) { return 1.00; } // base: node isRoot
+
+    // get battle roll from parent
+    const parentBattleAttackers = this.parent.battleAttackers;
+    const parentBattleDefenders = this.parent.battleDefenders;
+    const lossFromParent = this.lossFromParent;
+
+    return -1;
+  }
+
   // ------------------------------- Methods ------------------------------- //
   /**
    * Add a RollNode to the end of the RollNode's children array
@@ -57,10 +95,15 @@ export const RollNode = class {
 
   /**
    * Check if the node is a leaf node (has no children)
-   * Q: is it still a leaf if it has no parent either?
    * @return {boolean}
    */
-  isLeaf () { return (this.children.length) === 0 ? true : false; };
+  isLeaf () { return (this.children.length === 0) ? true : false; };
+
+  /**
+   * Check if the node is a root node (has no parent)
+   * @return {boolean}
+   */
+  isRoot () { return (this.parent === null) ? true : false; };
 
   // TODO: calculate total number of nodes
 
