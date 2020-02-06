@@ -1,16 +1,3 @@
-export const loseTroops = (attackers, defenders, troopsLost = 2) => {
-  const outcomes = [
-    [attackers - troopsLost, defenders],
-    [attackers, defenders - troopsLost],
-  ];
-
-  if (troopsLost === 2) { outcomes.push([attackers - 1, defenders - 1]) };
-
-  // TODO: sort outcomes in a way to easily traverse the resulting tree
-
-  return outcomes;
-}
-
 /**
  * RollNode object to create tree
  * @param {[Number]} rollPair -- array of two numbers: [nAtk, nDef]
@@ -73,43 +60,55 @@ export const RollNode = class {
    * Q: is it still a leaf if it has no parent either?
    * @return {boolean}
    */
-  isLeaf () { return this.children.length === 0 ? true : false; };
+  isLeaf () { return (this.children.length) === 0 ? true : false; };
 
+  // TODO: calculate total number of nodes
 
+  /** 
+   * Helper function to calculate possible outcomes for next battle
+   * @param {number} attackers - total number of attacking troops
+   * @param {number} defenders - total number of defending troops
+   */ 
+  static loseTroops (attackers, defenders) {
+    const troopsLost = (attackers >= 2 && defenders >= 2) ? 2 : 1;
+
+    // Outcomes -- Left: attack loses most, Right: defense loses most
+    const outcomes = [ 
+      [attackers - troopsLost, defenders], 
+      [attackers, defenders - troopsLost], 
+    ];
   
-  // TODO: calculate total number of nodes 
+    if (troopsLost === 2) {
+      outcomes.push([attackers - 1, defenders - 1]); // Middle
+      [outcomes[1], outcomes[2]] = [outcomes[2], outcomes[1]]; // Swap to middle
+    }  
+    return outcomes;
+  };
+
+  /**
+   * Generate the tree of possible outcomes. The root node will be the node that
+   * the function is called on. This modifies that node directly. 
+   */
+  makeOutcomesTree () { 
+    const rootNode = this;
+
+    // Base case: if the node's pair has any zeroes, it cannot have children
+    /**
+     * Note: this is modifiable. For example, you can change the condition to
+     * generate the tree up to when defenders are equal to attackers
+     */ 
+    const [nodeAtk, nodeDef] = [ rootNode.nAttackers, rootNode.nDefenders ];
+    if (nodeAtk === 0 || nodeDef === 0) { return rootNode };
+
+    // Recursive case: create children nodes
+    const outcomes = RollNode.loseTroops(nodeAtk, nodeDef);
+    for (let i = 0; i < outcomes.length; i++) {
+      // Turn the outcomes into RollNodes, make children, and add connect them
+      const newNode = new RollNode(outcomes[i]);
+      newNode.parent = rootNode;
+      newNode.makeOutcomesTree();
+      rootNode.addChild(newNode);
+    }
+    return rootNode;    
+  };
 };
-
-/**
- * Create a tree of all possible outcomes
- * @param {RollNode} parentNode - node to attach children to
- */
-export const createTree = (parentNode) => {
-  // Check that the parameter is a node
-  if (!(parentNode instanceof RollNode)) { return; };
-
-  // Base case: if the node's pair has any zeroes, it cannot have kids
-  const [nodeAtk, nodeDef] = [ parentNode.nAttackers, parentNode.nDefenders ];
-  if (nodeAtk === 0 || nodeDef === 0) { return parentNode };
-
-  // otherwise, create the tree
-  let children;  
-  if (nodeAtk >= 2 && nodeDef >= 2) {
-    children = loseTroops(nodeAtk, nodeDef, 2);
-  } else {
-    children = loseTroops(nodeAtk, nodeDef, 1);
-  }
-  // console.log(children, children.length);
-  for (let i = 0; i < children.length; i++) {
-    // turn child into a node
-    const newNode = new RollNode(children[i]);
-    newNode.parent = parentNode; // attach the child to the parent
-
-    // recursive case: CREATE tree from children
-    const childTree = createTree(newNode); 
-
-    // add that node to the parent node
-    parentNode.addChild(childTree);
-  }
-  return parentNode;
-}

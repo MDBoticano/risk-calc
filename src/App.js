@@ -3,13 +3,12 @@ import './App.scss';
 
 import { 
   RollNode,
-  createTree,
 } from './utilities/RollNode';
 
 const Node = ({ node }) => {
   const renderNode = (node) => {
     return (
-      <div className="node">
+      <div className="node" key={node.rollPair}>
         <span className="node-rollPair">
           {`${node.rollPair[0]},${node.rollPair[1]}`}
         </span>
@@ -30,13 +29,11 @@ const Node = ({ node }) => {
 };
 
 const App = () => {
-  // const newNode = new RollNode([1,0]);
   const newNode = new RollNode([4,4]);
-  // const newNode = new RollNode([8,8]);
-  const nodeTree = createTree(newNode);
+  const nodeTree = newNode.makeOutcomesTree();
 
   const displayTree = (tree) => {
-    return(
+    return (
       <div className="rollNode-tree">
         <Node node={tree} />
       </div>
