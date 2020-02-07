@@ -110,7 +110,7 @@ describe('RollNode class', () => {
     describe('calculate probabilities for deep nodes', () => {
       const newNode = new RollNode([3,2]);
       newNode.makeOutcomesTree();
-      newNode.getRelativeProbability();
+      // newNode.getRelativeProbability();
 
       const kid = newNode.children[0];
       const kidRoll = kid.lossFromParent;
@@ -120,7 +120,7 @@ describe('RollNode class', () => {
         const defShortage = kid.getRelativeProbability({
           defender: "ammoShortage"
         });
-        // console.log(even, defShortage);
+        console.log(even, defShortage);
         expect(defShortage).toBeLessThan(even);
       });
 
@@ -133,6 +133,14 @@ describe('RollNode class', () => {
         const rootProb = kid.getRootProbability();
         const relProb = kid.getRelativeProbability();
         expect(rootProb).toEqual(relProb);
+      });
+
+      test('odds with a fake defender modifier', () => {
+        const defaultOdds = newNode.getRelativeProbability();
+        const fakeOdds = newNode.getRelativeProbability({
+          defender: 'asdf'
+        });
+        expect(defaultOdds).toEqual(fakeOdds);
       });
     });
   });

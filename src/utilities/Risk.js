@@ -4,6 +4,10 @@ import {
   getDicePermutations,
 } from './Dice';
 
+import {
+  probabilityTable, 
+} from './probabilityTable';
+
 export class Modifiers {
   constructor({ dice , defender, attacker } = {
     dice: DICE_DEFAULT, defender : '', attacker : ''
@@ -153,10 +157,37 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
 };
 
 export const getOutcomeProbability = (atk, def, outcome, modifiers) => {
-  const allOutcomes = calcBattleOdds(atk, def, modifiers);
-  const requestedOutcome = {};
-  requestedOutcome.outcome = allOutcomes[outcome] || 0;
-  requestedOutcome.total = allOutcomes.total;
+  // Make Keys 
+ 
+  let modifierKey;
+  if (modifiers === null) {
+    modifierKey = 'default';
+  } else if (modifiers && modifiers.defender) {
+    if (modifiers.defender === 'ammoShortage') modifierKey = 'ammoShortage';
+    if (modifiers.defender === 'bunker') modifierKey = 'bunker';
+  } else {
+    modifierKey = 'default';
+  }
+  const battleKey = `[${atk},${def}]`;
+  const outcomeKey = `[${outcome[0]},${outcome[1]}]`;
+
+  // console.log('battleKey:', battleKey);
+  // console.log('outcomeKey:', outcomeKey);
+  // console.log('modifierKey:', modifierKey);
+
+
+  // console.log(probabilityTable);
+  // console.log(probabilityTable[battleKey][outcomeKey][modifierKey]);
+
+  // const probability = 0;
+  const requestedOutcome = probabilityTable[battleKey][outcomeKey][modifierKey];
+
+
+  // const allOutcomes = calcBattleOdds(atk, def, modifiers);
+  // const requestedOutcome = {};
+  // requestedOutcome.outcome = allOutcomes[outcome] || 0;
+  // requestedOutcome.total = Math.pow(6, atk + def);
+  // requestedOutcome.outcome = probability * requestedOutcome.total;
 
   return requestedOutcome;
 };

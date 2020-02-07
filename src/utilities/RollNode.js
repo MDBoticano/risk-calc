@@ -87,8 +87,9 @@ export const RollNode = class {
     const losses = this.lossFromParent;
 
     const odds = getOutcomeProbability(pMaxAtk, pMaxDef, losses, modifiers);
-    const probability = odds.outcome / odds.total;
-    return probability;
+    return odds;
+    // const probability = odds.outcome / odds.total;
+    // return probability;
   };
 
   // like relative probability, but multiple by all probabilities from this to

@@ -22,6 +22,9 @@ exports[`renders correctly 1`] = `
           className="node-rollPair-probability"
         >
           1.000
+          <p>
+            1.000
+          </p>
         </div>
         <div
           className="node-children-3"
@@ -38,6 +41,9 @@ exports[`renders correctly 1`] = `
               className="node-rollPair-probability"
             >
               0.293
+              <p>
+                0.293
+              </p>
             </div>
             <div
               className="node-children-3"
@@ -54,6 +60,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.448
+                  <p>
+                    0.131
+                  </p>
                 </div>
               </div>
               <div
@@ -68,6 +77,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.324
+                  <p>
+                    0.095
+                  </p>
                 </div>
                 <div
                   className="node-children-2"
@@ -84,6 +96,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.745
+                      <p>
+                        0.071
+                      </p>
                     </div>
                   </div>
                   <div
@@ -98,6 +113,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.255
+                      <p>
+                        0.024
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -114,6 +132,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.745
+                          <p>
+                            0.018
+                          </p>
                         </div>
                       </div>
                       <div
@@ -128,6 +149,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.255
+                          <p>
+                            0.006
+                          </p>
                         </div>
                         <div
                           className="node-children-2"
@@ -144,6 +168,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.583
+                              <p>
+                                0.004
+                              </p>
                             </div>
                           </div>
                           <div
@@ -158,6 +185,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.417
+                              <p>
+                                0.003
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -178,6 +208,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.228
+                  <p>
+                    0.067
+                  </p>
                 </div>
                 <div
                   className="node-children-3"
@@ -194,6 +227,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.448
+                      <p>
+                        0.030
+                      </p>
                     </div>
                   </div>
                   <div
@@ -208,6 +244,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.324
+                      <p>
+                        0.022
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -224,6 +263,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.583
+                          <p>
+                            0.013
+                          </p>
                         </div>
                       </div>
                       <div
@@ -238,6 +280,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.417
+                          <p>
+                            0.009
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -254,6 +299,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.228
+                      <p>
+                        0.015
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -272,6 +320,9 @@ exports[`renders correctly 1`] = `
               className="node-rollPair-probability"
             >
               0.336
+              <p>
+                0.336
+              </p>
             </div>
             <div
               className="node-children-3"
@@ -288,6 +339,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.293
+                  <p>
+                    0.098
+                  </p>
                 </div>
                 <div
                   className="node-children-2"
@@ -304,6 +358,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.745
+                      <p>
+                        0.073
+                      </p>
                     </div>
                   </div>
                   <div
@@ -318,6 +375,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.255
+                      <p>
+                        0.025
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -334,6 +394,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.745
+                          <p>
+                            0.019
+                          </p>
                         </div>
                       </div>
                       <div
@@ -348,6 +411,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.255
+                          <p>
+                            0.006
+                          </p>
                         </div>
                         <div
                           className="node-children-2"
@@ -364,6 +430,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.583
+                              <p>
+                                0.004
+                              </p>
                             </div>
                           </div>
                           <div
@@ -378,6 +447,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.417
+                              <p>
+                                0.003
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -398,6 +470,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.336
+                  <p>
+                    0.113
+                  </p>
                 </div>
                 <div
                   className="node-children-3"
@@ -414,6 +489,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.448
+                      <p>
+                        0.051
+                      </p>
                     </div>
                   </div>
                   <div
@@ -428,6 +506,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.324
+                      <p>
+                        0.037
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -444,6 +525,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.583
+                          <p>
+                            0.021
+                          </p>
                         </div>
                       </div>
                       <div
@@ -458,6 +542,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.417
+                          <p>
+                            0.015
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -474,6 +561,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.228
+                      <p>
+                        0.026
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -490,6 +580,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.372
+                  <p>
+                    0.125
+                  </p>
                 </div>
                 <div
                   className="node-children-2"
@@ -506,6 +599,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.340
+                      <p>
+                        0.042
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -522,6 +618,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.421
+                          <p>
+                            0.018
+                          </p>
                         </div>
                         <div
                           className="node-children-2"
@@ -538,6 +637,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.583
+                              <p>
+                                0.010
+                              </p>
                             </div>
                           </div>
                           <div
@@ -552,6 +654,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.417
+                              <p>
+                                0.007
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -568,6 +673,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.579
+                          <p>
+                            0.025
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -584,6 +692,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.660
+                      <p>
+                        0.082
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -602,6 +713,9 @@ exports[`renders correctly 1`] = `
               className="node-rollPair-probability"
             >
               0.372
+              <p>
+                0.372
+              </p>
             </div>
             <div
               className="node-children-3"
@@ -618,6 +732,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.293
+                  <p>
+                    0.109
+                  </p>
                 </div>
                 <div
                   className="node-children-3"
@@ -634,6 +751,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.448
+                      <p>
+                        0.049
+                      </p>
                     </div>
                   </div>
                   <div
@@ -648,6 +768,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.324
+                      <p>
+                        0.035
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -664,6 +787,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.583
+                          <p>
+                            0.021
+                          </p>
                         </div>
                       </div>
                       <div
@@ -678,6 +804,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.417
+                          <p>
+                            0.015
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -694,6 +823,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.228
+                      <p>
+                        0.025
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -710,6 +842,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.336
+                  <p>
+                    0.125
+                  </p>
                 </div>
                 <div
                   className="node-children-2"
@@ -726,6 +861,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.340
+                      <p>
+                        0.042
+                      </p>
                     </div>
                     <div
                       className="node-children-2"
@@ -742,6 +880,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.421
+                          <p>
+                            0.018
+                          </p>
                         </div>
                         <div
                           className="node-children-2"
@@ -758,6 +899,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.583
+                              <p>
+                                0.010
+                              </p>
                             </div>
                           </div>
                           <div
@@ -772,6 +916,9 @@ exports[`renders correctly 1`] = `
                               className="node-rollPair-probability"
                             >
                               0.417
+                              <p>
+                                0.007
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -788,6 +935,9 @@ exports[`renders correctly 1`] = `
                           className="node-rollPair-probability"
                         >
                           0.579
+                          <p>
+                            0.025
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -804,6 +954,9 @@ exports[`renders correctly 1`] = `
                       className="node-rollPair-probability"
                     >
                       0.660
+                      <p>
+                        0.082
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -820,6 +973,9 @@ exports[`renders correctly 1`] = `
                   className="node-rollPair-probability"
                 >
                   0.372
+                  <p>
+                    0.138
+                  </p>
                 </div>
               </div>
             </div>
