@@ -120,8 +120,19 @@ describe('RollNode class', () => {
         const defShortage = kid.getRelativeProbability({
           defender: "ammoShortage"
         });
-        console.log(even, defShortage);
+        // console.log(even, defShortage);
         expect(defShortage).toBeLessThan(even);
+      });
+
+      test('rootProb of root node is 1', () => {
+        const rootProb = newNode.getRootProbability();
+        expect(rootProb).toEqual(1);
+      });
+
+      test('rootProb of a depth 1 node is same as relative', () => {
+        const rootProb = kid.getRootProbability();
+        const relProb = kid.getRelativeProbability();
+        expect(rootProb).toEqual(relProb);
       });
     });
   });

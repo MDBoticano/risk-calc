@@ -14,6 +14,7 @@ const Node = ({ node }) => {
         </span>
         <div className="node-rollPair-probability">
           { `${node.getRelativeProbability().toFixed(3)}`}
+          <p>{ `${node.getRootProbability().toFixed(3)}`}</p>
         </div>
         { node.children.length > 0 &&
           <div className={`node-children-${node.children.length}`}>

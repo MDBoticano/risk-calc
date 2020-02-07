@@ -81,12 +81,6 @@ export const RollNode = class {
   getRelativeProbability (modifiers) {
     if (this.isRoot()) { return 1.00; } // base: node isRoot
 
-    // if (!(modifiers instanceof Modifiers)) {
-    //   console.log('making modifiers...');
-    //   modifiers = new Modifiers(modifiers);
-    //   console.log(modifiers);
-    // }
-
     // get battle roll from parent
     const pMaxAtk = this.parent.maxAttackers;
     const pMaxDef = this.parent.maxDefenders;
@@ -95,13 +89,28 @@ export const RollNode = class {
     const odds = getOutcomeProbability(pMaxAtk, pMaxDef, losses, modifiers);
     const probability = odds.outcome / odds.total;
     return probability;
-  }
+  };
 
   // like relative probability, but multiple by all probabilities from this to
   // root
   getRootProbability (modifiers) {
+    // Helper: get probabilities and store them in an array
+    const parentProbs = (node, probabilityArray = []) => {
+      // Add the node's probability to the array
+      probabilityArray.push(node.getRelativeProbability(modifiers));
 
-  }
+      // Recursive case: if a parent exists, add its probability
+      if (!node.isRoot()) { parentProbs(node.parent, probabilityArray); }
+      return probabilityArray; 
+    };
+
+    const probabilities = parentProbs(this);
+    // console.log(probabilities);
+
+    // Reduce probabilities by multiplying all values together
+    const rootProbability = probabilities.reduce((a, b) => a * b);
+    return rootProbability;
+  };
 
   /**
    * Add a RollNode to the end of the RollNode's children array
