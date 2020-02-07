@@ -72,6 +72,61 @@ export const RollNode = class {
     return lossFromParent;
   };
 
+  /**
+   * Get all leaf-nodes.
+   * @return {[RollNode]} -- array of leaf nodes
+   */
+  get leaves () {
+    const retrieveLeaves = (node, leaves = []) => {
+      if (node.isLeaf()) {
+        leaves.push(node);
+        return leaves;
+      } else {
+        for (let i = 0; i < node.children.length; i++) {
+          retrieveLeaves(node.children[i], leaves);
+        }
+      }
+      return leaves;
+    };
+
+    const allLeaves = retrieveLeaves(this);
+    return allLeaves;
+  };
+
+  get leafProbabilities () {
+    const getLeafProbs = (node, probs = []) => {
+      if (node.isLeaf()) {
+        probs.push({
+          // outcome: node.lossFromParent,
+          outcome: node.rollPair,
+          probability: node.getRootProbability(),
+        });
+        return probs;
+      } else {
+        for(let i = 0; i < node.children.length; i++) {
+          getLeafProbs(node.children[i], probs);
+        }
+      }
+      return probs;
+    };
+
+    const leafProbabilities = getLeafProbs(this);
+    return leafProbabilities;
+  };
+
+  static reduceOutcomes (outcomeProbs) {
+    const finalProbs = {};
+    for (let i = 0; i < outcomeProbs.length; i++) {
+      if (!(finalProbs[outcomeProbs[i].outcome])) {
+        finalProbs[outcomeProbs[i].outcome] = outcomeProbs[i].probability;
+      } else {
+        finalProbs[outcomeProbs[i].outcome] += outcomeProbs[i].probability;
+      }
+    }
+    return finalProbs;
+  };
+
+
   // ------------------------------- Methods ------------------------------- //
   /**
    * Get probability of rollPair based on parent's rollPair
@@ -180,4 +235,8 @@ export const RollNode = class {
     }
     return rootNode;    
   };
+
 };
+
+
+

@@ -49,10 +49,10 @@ describe('RollNode class', () => {
   //   // console.log(newTree.children[0].children[0]);
   // });
 
-  test('make tree with class method', () => {
-    const newNode = new RollNode([2, 2]);
-    newNode.makeOutcomesTree();
-  });
+  // test('make tree with class method', () => {
+  //   const newNode = new RollNode([2, 2]);
+  //   newNode.makeOutcomesTree();
+  // });
 
 
   describe('RollNode methods', () => {
@@ -107,41 +107,58 @@ describe('RollNode class', () => {
     //   });
     // });
 
-    describe('calculate probabilities for deep nodes', () => {
-      const newNode = new RollNode([3,2]);
+    // describe('calculate probabilities for deep nodes', () => {
+    //   const newNode = new RollNode([3,2]);
+    //   newNode.makeOutcomesTree();
+    //   // newNode.getRelativeProbability();
+
+    //   const kid = newNode.children[0];
+    //   const kidRoll = kid.lossFromParent;
+
+    //   test(`odds of ${kidRoll} is less with defender ammo shortage`, () => {
+    //     const even = kid.getRelativeProbability();
+    //     const defShortage = kid.getRelativeProbability({
+    //       defender: "ammoShortage"
+    //     });
+    //     // console.log(even, defShortage);
+    //     expect(defShortage).toBeLessThan(even);
+    //   });
+
+    //   test('rootProb of root node is 1', () => {
+    //     const rootProb = newNode.getRootProbability();
+    //     expect(rootProb).toEqual(1);
+    //   });
+
+    //   test('rootProb of a depth 1 node is same as relative', () => {
+    //     const rootProb = kid.getRootProbability();
+    //     const relProb = kid.getRelativeProbability();
+    //     expect(rootProb).toEqual(relProb);
+    //   });
+
+    //   test('odds with a fake defender modifier', () => {
+    //     const defaultOdds = newNode.getRelativeProbability();
+    //     const fakeOdds = newNode.getRelativeProbability({
+    //       defender: 'asdf'
+    //     });
+    //     expect(defaultOdds).toEqual(fakeOdds);
+    //   });
+    // });
+
+    test('leaf probabilities add up to one', () => {
+      const newNode = new RollNode([8, 8]);
       newNode.makeOutcomesTree();
-      // newNode.getRelativeProbability();
+      const leafProbabilities = newNode.leafProbabilities;
+      // console.log(leafProbabilities);
+      const reduceLeaf = RollNode.reduceOutcomes(leafProbabilities);
+      console.log(reduceLeaf);
 
-      const kid = newNode.children[0];
-      const kidRoll = kid.lossFromParent;
-
-      test(`odds of ${kidRoll} is less with defender ammo shortage`, () => {
-        const even = kid.getRelativeProbability();
-        const defShortage = kid.getRelativeProbability({
-          defender: "ammoShortage"
-        });
-        console.log(even, defShortage);
-        expect(defShortage).toBeLessThan(even);
-      });
-
-      test('rootProb of root node is 1', () => {
-        const rootProb = newNode.getRootProbability();
-        expect(rootProb).toEqual(1);
-      });
-
-      test('rootProb of a depth 1 node is same as relative', () => {
-        const rootProb = kid.getRootProbability();
-        const relProb = kid.getRelativeProbability();
-        expect(rootProb).toEqual(relProb);
-      });
-
-      test('odds with a fake defender modifier', () => {
-        const defaultOdds = newNode.getRelativeProbability();
-        const fakeOdds = newNode.getRelativeProbability({
-          defender: 'asdf'
-        });
-        expect(defaultOdds).toEqual(fakeOdds);
-      });
+      // iterate through object and add up probabilities
+      let sum = 0;
+      for (const property in reduceLeaf) {
+        sum += reduceLeaf[property];
+      }
+      // expect(sum).toBeCloseTo(1);
+      expect(sum).toEqual(1);
     });
   });
 });

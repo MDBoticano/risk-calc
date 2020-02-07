@@ -13,8 +13,11 @@ const Node = ({ node }) => {
           {`${node.rollPair[0]},${node.rollPair[1]}`}
         </span>
         <div className="node-rollPair-probability">
-          { `${node.getRelativeProbability().toFixed(3)}`}
-          <p>{ `${node.getRootProbability().toFixed(3)}`}</p>
+          {/* { `${node.getRelativeProbability().toFixed(3)}`} */}
+          { `${node.getRelativeProbability().toExponential(2)}`}
+          {/* <p>{ `${node.getRootProbability().toFixed(3)}`}</p> */}
+          <p>{ `${node.getRootProbability().toExponential(2)}`}</p>
+          {/* <p>{ `${node.getRootProbability().toPrecision(3)}`}</p> */}
         </div>
         { node.children.length > 0 &&
           <div className={`node-children-${node.children.length}`}>
@@ -33,7 +36,8 @@ const Node = ({ node }) => {
 };
 
 const App = () => {
-  const newNode = new RollNode([4,4]);
+  // const newNode = new RollNode([4,4]);
+  const newNode = new RollNode([10,10]);
   const nodeTree = newNode.makeOutcomesTree();
 
   const displayTree = (tree) => {
