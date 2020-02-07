@@ -12,6 +12,9 @@ const Node = ({ node }) => {
         <span className="node-rollPair">
           {`${node.rollPair[0]},${node.rollPair[1]}`}
         </span>
+        <div className="node-rollPair-probability">
+          { `${node.getRelativeProbability().toFixed(3)}`}
+        </div>
         { node.children.length > 0 &&
           <div className={`node-children-${node.children.length}`}>
             { node.children.map((child) => { return renderNode(child); }) }

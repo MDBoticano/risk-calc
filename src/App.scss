@@ -40,6 +40,11 @@
     overflow: hidden;
     // border-bottom: solid 1px black;
     border: solid 1px black;
+
+    &-probability {
+      display: block;
+      margin-bottom: 1rem;
+    }
   }
 
   &-children {  

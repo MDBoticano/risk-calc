@@ -56,8 +56,8 @@ describe('RollNode class', () => {
 
 
   describe('RollNode methods', () => {
-    describe('a new node...', () => {
-      const newNode = new RollNode([1,1]);
+    // describe('a new node...', () => {
+    //   const newNode = new RollNode([1,1]);
       
     //   test('has a depth of 0', () => {
     //     expect(newNode.depth).toBe(0);
@@ -72,10 +72,10 @@ describe('RollNode class', () => {
     //     expect(newNode.isLeaf()).toBe(true);
     //   });
 
-      test('has a probability of 1.00', () => {
-        expect(newNode.getRelativeProbability()).toBe(1);
-      });
-    });
+    //   test('has a probability of 1.00', () => {
+    //     expect(newNode.getRelativeProbability()).toBe(1);
+    //   });
+    // });
 
     // test('the root of a depth 1 node is the depth 0 node', () => {
     //   const newNode = new RollNode([1,1]);
@@ -87,23 +87,41 @@ describe('RollNode class', () => {
     //   expect(newNode.children[1].lossFromParent).toEqual([0, 1]);
     // });
 
-    describe('battle units count', () => {
-      test('more than max battle attackers/defenders', () => {
-        const newNode = new RollNode([4, 4]);
-        expect(newNode.battleAttackers).toBe(3);
-        expect(newNode.battleDefenders).toBe(2);
-      });
+    // describe('battle units count', () => {
+    //   test('more than max battle attackers/defenders', () => {
+    //     const newNode = new RollNode([4, 4]);
+    //     expect(newNode.maxAttackers).toBe(3);
+    //     expect(newNode.maxDefenders).toBe(2);
+    //   });
 
-      test('equal to max battle attackers/defenders', () => {
-        const newNode = new RollNode([3, 2]);
-        expect(newNode.battleAttackers).toBe(3);
-        expect(newNode.battleDefenders).toBe(2);
-      });
+    //   test('equal to max battle attackers/defenders', () => {
+    //     const newNode = new RollNode([3, 2]);
+    //     expect(newNode.maxAttackers).toBe(3);
+    //     expect(newNode.maxDefenders).toBe(2);
+    //   });
 
-      test('below max battle attackers/defenders', () => {
-        const newNode = new RollNode([1, 1]);
-        expect(newNode.battleAttackers).toBe(1);
-        expect(newNode.battleDefenders).toBe(1);
+    //   test('below max battle attackers/defenders', () => {
+    //     const newNode = new RollNode([1, 1]);
+    //     expect(newNode.maxAttackers).toBe(1);
+    //     expect(newNode.maxDefenders).toBe(1);
+    //   });
+    // });
+
+    describe('calculate probabilities for deep nodes', () => {
+      const newNode = new RollNode([3,2]);
+      newNode.makeOutcomesTree();
+      newNode.getRelativeProbability();
+
+      const kid = newNode.children[0];
+      const kidRoll = kid.lossFromParent;
+
+      test(`odds of ${kidRoll} is less with defender ammo shortage`, () => {
+        const even = kid.getRelativeProbability();
+        const defShortage = kid.getRelativeProbability({
+          defender: "ammoShortage"
+        });
+        console.log(even, defShortage);
+        expect(defShortage).toBeLessThan(even);
       });
     });
   });

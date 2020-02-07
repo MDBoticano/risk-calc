@@ -108,14 +108,9 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
     }
 
     if (attacker === 'enclave') {
-
       const result = enclaveCompareRolls(atkRolls, defRolls);
-      // console.log('Enclave result:', result);
       combinationResults.push(result);
-
       continue; // don't do the regular compare, just go to next permutation
-
-      // expect to have a slightly better percentage than unmodified comparison
     }
 
     const combinationResult = compareRolls(atkRolls, defRolls);
@@ -127,7 +122,9 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
   for (let i = 0; i < permutationsCount; i++) {
     const atkLosses = combinationResults[i][0];
     const defLosses = combinationResults[i][1];
-    const outcomeKey = `ATK -${atkLosses}, DEF -${defLosses}`;
+    // const outcomeKey = `ATK -${atkLosses}, DEF -${defLosses}`;
+    // const outcomeKey = `[ ${atkLosses}, ${defLosses} ]`;
+    const outcomeKey = [ atkLosses, defLosses ];
 
     if(!outcomes[outcomeKey]) {
       outcomes[outcomeKey] = 1;
@@ -135,21 +132,31 @@ export const calcBattleOdds = (nAtk = 1, nDef = 1, modifiers = defMod) => {
       outcomes[outcomeKey] += 1;
     }
   }
+  outcomes.total = Math.pow(dice.min + dice.max - 1, nAtk + nDef);
   // console.log(outcomes);
+  return outcomes;
 
-  const odds = {};
-  odds.situation = `${nAtk}Atk v ${nDef}Def`;
-  // odds.modifiers = `${modifiers.defender} ${modifiers.attacker}`;
-  odds.modifiers = modifiers;
+  // const odds = {};
+  // odds.situation = `${nAtk}Atk v ${nDef}Def`;
+  // odds.modifiers = modifiers;
   // odds.totalOutcomes = Math.pow(dice.min + dice.max - 1, nAtk + nDef);
-  const outcomeKeys = Object.keys(outcomes);
-  for (let i = 0; i < outcomeKeys.length; i++) {
-    const outcomePercent =  (
-      outcomes[outcomeKeys[i]] / permutationsCount * 100
-    ).toFixed(3);
-    // odds[outcomeKeys[i]] = `${outcomePercent} (${outcomes[outcomeKeys[i]]})`;
-    odds[outcomeKeys[i]] = `${outcomePercent}`;
-  }
+  // const outcomeKeys = Object.keys(outcomes);
+  // for (let i = 0; i < outcomeKeys.length; i++) {
+  //   const outcomePercent =  (
+  //     outcomes[outcomeKeys[i]] / permutationsCount * 100
+  //   ).toFixed(3);
+  //   // odds[outcomeKeys[i]] = `${outcomePercent} (${outcomes[outcomeKeys[i]]})`;
+  //   odds[outcomeKeys[i]] = `${outcomePercent}`;
+  // }
   // console.log(odds);
-  return odds;
+  // return odds;
+};
+
+export const getOutcomeProbability = (atk, def, outcome, modifiers) => {
+  const allOutcomes = calcBattleOdds(atk, def, modifiers);
+  const requestedOutcome = {};
+  requestedOutcome.outcome = allOutcomes[outcome] || 0;
+  requestedOutcome.total = allOutcomes.total;
+
+  return requestedOutcome;
 };

@@ -1,3 +1,8 @@
+import {
+  getOutcomeProbability,
+} from './Risk';
+
+
 /**
  * RollNode object to create tree
  * @param {[Number]} rollPair -- array of two numbers: [nAtk, nDef]
@@ -15,8 +20,8 @@ export const RollNode = class {
   get nDefenders () { return this.rollPair[1]; };
 
   // Number of troops in attacker's best-case scenario battle
-  get battleAttackers () { return this.nAttackers >= 3 ? 3 : this.nAttackers; };
-  get battleDefenders () { return this.nDefenders >= 2 ? 2 : this.nDefenders; };
+  get maxAttackers () { return this.nAttackers >= 3 ? 3 : this.nAttackers; };
+  get maxDefenders () { return this.nDefenders >= 2 ? 2 : this.nDefenders; };
 
   // TODO: calculate probabilities: child to parent
   // Q: calculate from within or pass as a calculated value when creating node? 
@@ -76,12 +81,20 @@ export const RollNode = class {
   getRelativeProbability (modifiers) {
     if (this.isRoot()) { return 1.00; } // base: node isRoot
 
-    // get battle roll from parent
-    const parentBattleAttackers = this.parent.battleAttackers;
-    const parentBattleDefenders = this.parent.battleDefenders;
-    const lossFromParent = this.lossFromParent;
+    // if (!(modifiers instanceof Modifiers)) {
+    //   console.log('making modifiers...');
+    //   modifiers = new Modifiers(modifiers);
+    //   console.log(modifiers);
+    // }
 
-    return -1;
+    // get battle roll from parent
+    const pMaxAtk = this.parent.maxAttackers;
+    const pMaxDef = this.parent.maxDefenders;
+    const losses = this.lossFromParent;
+
+    const odds = getOutcomeProbability(pMaxAtk, pMaxDef, losses, modifiers);
+    const probability = odds.outcome / odds.total;
+    return probability;
   }
 
   // like relative probability, but multiple by all probabilities from this to

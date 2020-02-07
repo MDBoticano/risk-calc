@@ -1,10 +1,6 @@
 import {
-  getDicePermutations,
-} from './Dice';
-
-import {
   calcBattleOdds,
-  Modifiers,
+  getOutcomeProbability,
 } from './Risk';
 
 // describe('list all permutations', () => {
@@ -137,18 +133,23 @@ describe('list odds for modified rolls', () => {
   //   console.log(result);
   // });
 
-  test('run calcBattleOdds for default 1v1 but enclave attacker', () => {
-    const result = calcBattleOdds(1, 1, { attacker: "enclave" });
-    console.log(result); // first check (num attackers) fails, default result
-  });
+  // test('run calcBattleOdds for default 1v1 but enclave attacker', () => {
+  //   const result = calcBattleOdds(1, 1, { attacker: "enclave" });
+  //   console.log(result); // first check (num attackers) fails, default result
+  // });
 
-  test('run calcBattleOdds for 3v1 but enclave attacker', () => {
-    const result = calcBattleOdds(3, 1, { attacker: "enclave" });
-    console.log(result); // first check (num attackers) passes
-  });
+  // test('run calcBattleOdds for 3v1 but enclave attacker', () => {
+  //   const result = calcBattleOdds(3, 1, { attacker: "enclave" });
+  //   console.log(result); // first check (num attackers) passes
+  // });
 
-  test('run calcBattleOdds for default 3v2 but enclave attacker', () => {
-    const result = calcBattleOdds(3, 2, { attacker: "enclave" });
-    console.log(result); // first check (num attackers) passes
+  // test('run calcBattleOdds for default 3v2 but enclave attacker', () => {
+  //   const result = calcBattleOdds(3, 2, { attacker: "enclave" });
+  //   console.log(result); // first check (num attackers) passes
+  // });
+
+  test('get outcome probability for impossible outcome' ,() => {
+    const result = getOutcomeProbability(3, 2, [3, 0]);
+    expect(result.outcome).toBe(0);
   });
 });
