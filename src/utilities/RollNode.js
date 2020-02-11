@@ -236,6 +236,13 @@ export const RollNode = class {
     return rootNode;    
   };
 
+  getOdds () {
+    this.makeOutcomesTree();
+    const probabilities = this.leafProbabilities;
+    const reducedOutcomes = RollNode.reduceOutcomes(probabilities);
+    return reducedOutcomes;
+  };
+
 };
 
 
