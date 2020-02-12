@@ -114,13 +114,28 @@ export const RollNode = class {
     return leafProbabilities;
   };
 
-  static reduceOutcomes (outcomeProbs) {
-    const finalProbs = {};
-    for (let i = 0; i < outcomeProbs.length; i++) {
-      if (!(finalProbs[outcomeProbs[i].outcome])) {
-        finalProbs[outcomeProbs[i].outcome] = outcomeProbs[i].probability;
+  /**
+   * Sum probabilities of leaf nodes with matching outcomes
+   * @param {[{ outcome: string, probability: number }]} outcomes 
+   */
+  static reduceOutcomes (outcomes) {
+    const finalProbs = [];
+    
+    for (let i = 0; i < outcomes.length; i++) {
+      const { outcome, probability } = outcomes[i];
+      const outcomeStrings = finalProbs.map(obj => JSON.stringify(obj.outcome));
+      const outcomeIndex = outcomeStrings.indexOf(JSON.stringify(outcome));
+
+      // add the probability to the outcome
+      if (outcomeIndex >= 0) {
+        finalProbs[outcomeIndex].probability = 
+        finalProbs[outcomeIndex].probability + probability;
       } else {
-        finalProbs[outcomeProbs[i].outcome] += outcomeProbs[i].probability;
+        // make a new object if none of the objects have the outcome
+        finalProbs.push({ 
+          outcome: outcome, 
+          probability: probability,
+        });
       }
     }
     return finalProbs;

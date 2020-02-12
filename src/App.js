@@ -43,8 +43,8 @@ const App = () => {
         attackLoses.push(oddsObject);
       }
     }
-    console.log(attackWins);
-    console.log(attackLoses);
+    // console.log(attackWins);
+    // console.log(attackLoses);
 
     setOddsAttackWins(attackWins);
     setOddsAttackLoses(attackLoses);
@@ -68,6 +68,15 @@ const App = () => {
     return displayedOutcomes;
   };
 
+  // TODO: redo leaf probabilities first to have easier object to work with
+  // const displayTotalOutcome = (outcomeArray) => {
+  //   if (outcomeArray.length <= 0) { return 0; }
+  //   const totalPercent = outcomeArray.reduce((a, b) => {
+  //     return (Object.values(a)[0] + Object.values(b)[0]);
+  //   });
+  //   return totalPercent;
+  // };
+
   return (
     <div className="App">
       <form onSubmit={(event) => calculateOdds(event)}>
@@ -90,10 +99,12 @@ const App = () => {
       <div className="outcomesTable">
         <div className="outcomesTable__wins">
           <p>Attack Wins</p>
+          {/* { displayTotalOutcome(oddsAttackWins) } */}
           { displayOutcomes(oddsAttackWins) }
         </div>
         <div className="outcomesTable__losses">
           <p>Attack Loses</p>
+          {/* { displayTotalOutcome(oddsAttackLoses) } */}
           { displayOutcomes(oddsAttackLoses) }
         </div>
       </div>

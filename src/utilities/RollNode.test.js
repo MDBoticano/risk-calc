@@ -144,21 +144,31 @@ describe('RollNode class', () => {
     //   });
     // });
 
+    test ('updated reduceOutcomes', () => {
+      const reduceLeaf = RollNode.reduceOutcomes([
+        { outcome: [ 1, 0 ], probability: 0.25 },
+        { outcome: [ 1, 0 ], probability: 0.25 },
+        { outcome: [ 0, 1 ], probability: 0.5 },
+      ]);
+      // console.log(reduceLeaf);
+      expect(reduceLeaf.length).toBe(2);
+
+      const reduceValues = reduceLeaf.map(obj => obj.probability);
+      const sum = reduceValues.reduce((a,b) => a + b);
+      expect(sum).toBe(1);
+    });
+
     test('leaf probabilities add up to one', () => {
       const newNode = new RollNode([8, 8]);
       newNode.makeOutcomesTree();
       const leafProbabilities = newNode.leafProbabilities;
-      // console.log(leafProbabilities);
       const reduceLeaf = RollNode.reduceOutcomes(leafProbabilities);
-      console.log(reduceLeaf);
+      // console.log(reduceLeaf);
+      expect(reduceLeaf.length).toBe(16);
 
-      // iterate through object and add up probabilities
-      let sum = 0;
-      for (const property in reduceLeaf) {
-        sum += reduceLeaf[property];
-      }
-      // expect(sum).toBeCloseTo(1);
-      expect(sum).toEqual(1);
+      const reduceValues = reduceLeaf.map(obj => obj.probability);
+      const sum = reduceValues.reduce((a,b) => a + b);
+      expect(sum).toBe(1);
     });
   });
 });
