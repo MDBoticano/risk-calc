@@ -93,27 +93,6 @@ export const RollNode = class {
     return allLeaves;
   };
 
-  get leafProbabilities () {
-    const getLeafProbs = (node, probs = []) => {
-      if (node.isLeaf()) {
-        probs.push({
-          // outcome: node.lossFromParent,
-          outcome: node.rollPair,
-          probability: node.getRootProbability(),
-        });
-        return probs;
-      } else {
-        for(let i = 0; i < node.children.length; i++) {
-          getLeafProbs(node.children[i], probs);
-        }
-      }
-      return probs;
-    };
-
-    const leafProbabilities = getLeafProbs(this);
-    return leafProbabilities;
-  };
-
   /**
    * Sum probabilities of leaf nodes with matching outcomes
    * @param {[{ outcome: string, probability: number }]} outcomes 
@@ -123,8 +102,8 @@ export const RollNode = class {
     
     for (let i = 0; i < outcomes.length; i++) {
       const { outcome, probability } = outcomes[i];
-      const outcomeStrings = finalProbs.map(obj => JSON.stringify(obj.outcome));
-      const outcomeIndex = outcomeStrings.indexOf(JSON.stringify(outcome));
+      const outcomeStrings = finalProbs.map(obj => obj.outcome);
+      const outcomeIndex = outcomeStrings.indexOf(`${outcome}`);
 
       // add the probability to the outcome
       if (outcomeIndex >= 0) {
@@ -133,7 +112,7 @@ export const RollNode = class {
       } else {
         // make a new object if none of the objects have the outcome
         finalProbs.push({ 
-          outcome: outcome, 
+          outcome: `${outcome}`, 
           probability: probability,
         });
       }
@@ -224,6 +203,27 @@ export const RollNode = class {
     return outcomes;
   };
 
+  getLeafProbabilities (modifiers) {
+    const getLeafProbs = (node, probs = []) => {
+      if (node.isLeaf()) {
+        probs.push({
+          // outcome: node.lossFromParent,
+          outcome: node.rollPair,
+          probability: node.getRootProbability(modifiers),
+        });
+        return probs;
+      } else {
+        for(let i = 0; i < node.children.length; i++) {
+          getLeafProbs(node.children[i], probs);
+        }
+      }
+      return probs;
+    };
+
+    const leafProbabilities = getLeafProbs(this);
+    return leafProbabilities;
+  };
+
   /**
    * Generate the tree of possible outcomes. The root node will be the node that
    * the function is called on. This modifies that node directly. 
@@ -251,14 +251,12 @@ export const RollNode = class {
     return rootNode;    
   };
 
-  getOdds () {
+  // combine getting leaf probabilities and reducing them
+  getOdds (modifiers) {
     this.makeOutcomesTree();
-    const probabilities = this.leafProbabilities;
+    const probabilities = this.getLeafProbabilities(modifiers);
     const reducedOutcomes = RollNode.reduceOutcomes(probabilities);
     return reducedOutcomes;
   };
-
+ 
 };
-
-
-

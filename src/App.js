@@ -8,13 +8,10 @@ import {
 const App = () => {
   const [numAttackers, setNumAttackers] = useState(0);
   const [numDefenders, setNumDefenders] = useState(0);
+  const [modifiers] = useState(); // not yet used
 
   const [oddsAttackWins, setOddsAttackWins] = useState([]);
   const [oddsAttackLoses, setOddsAttackLoses] = useState([]);
-
-  // make form 
-
-  // make modifiers
 
   // return outcomes percentages in a table
 
@@ -22,25 +19,26 @@ const App = () => {
     event.preventDefault();
 
     const rollTree = new RollNode([numAttackers, numDefenders]);
-    const treeLeafOdds = rollTree.getOdds();
+    const treeLeafOdds = rollTree.getOdds(modifiers);
     // console.log(treeLeafOdds);
 
     // console.log('Keys:', Object.keys(treeLeafOdds));
     // console.log('Values:', Object.values(treeLeafOdds));
 
-    const oddsKeys = Object.keys(treeLeafOdds);
-    const oddsValues = Object.values(treeLeafOdds);
+    // const oddsOutcomes = treeLeafOdds.map((obj) => obj.outcome);
+    // const oddsProbabilities = treeLeafOdds.map((obj) => obj.probability);
 
     const attackWins = [];
     const attackLoses = [];
 
-    for (let i = 0; i < oddsKeys.length; i++) {
-      const oddsObject = {};
-      oddsObject[oddsKeys[i]] = oddsValues[i];
-      if (oddsKeys[i][0] !== '0') { 
-        attackWins.push(oddsObject);
+    for (let i = 0; i < treeLeafOdds.length; i++) {
+      // const oddsObject = {};
+      const outcome = treeLeafOdds[i].outcome;
+      console.log('outcome:', outcome);
+      if (treeLeafOdds[i].outcome[0] !== '0') { 
+        attackWins.push(treeLeafOdds[i]);
       } else {
-        attackLoses.push(oddsObject);
+        attackLoses.push(treeLeafOdds[i]);
       }
     }
     // console.log(attackWins);
@@ -58,9 +56,9 @@ const App = () => {
   const displayOutcomes = (outcomeArray) => {
     const displayedOutcomes = outcomeArray.map((outcome) => {
       return (
-        <div key={Object.keys(outcome)[0]}>
-          <p>{Object.keys(outcome)[0]}</p>
-          <p>{((Object.values(outcome)[0])*100).toFixed(2)}</p>
+        <div key={outcome.outcome}>
+          <p>{outcome.outcome}</p>
+          <p>{((outcome.probability)*100).toFixed(2)}</p>
         </div>
       );
     });
@@ -69,13 +67,13 @@ const App = () => {
   };
 
   // TODO: redo leaf probabilities first to have easier object to work with
-  // const displayTotalOutcome = (outcomeArray) => {
-  //   if (outcomeArray.length <= 0) { return 0; }
-  //   const totalPercent = outcomeArray.reduce((a, b) => {
-  //     return (Object.values(a)[0] + Object.values(b)[0]);
-  //   });
-  //   return totalPercent;
-  // };
+  const displayTotalOutcome = (outcomeArray) => {
+    if (outcomeArray.length <= 0) { return 0; }
+    const probabilitiesSum = outcomeArray.map((outcome) => outcome.probability)
+      .reduce((a,b) => a + b)
+      .toFixed(2);
+    return probabilitiesSum;
+  };
 
   return (
     <div className="App">
@@ -99,12 +97,12 @@ const App = () => {
       <div className="outcomesTable">
         <div className="outcomesTable__wins">
           <p>Attack Wins</p>
-          {/* { displayTotalOutcome(oddsAttackWins) } */}
+          { displayTotalOutcome(oddsAttackWins) }
           { displayOutcomes(oddsAttackWins) }
         </div>
         <div className="outcomesTable__losses">
           <p>Attack Loses</p>
-          {/* { displayTotalOutcome(oddsAttackLoses) } */}
+          { displayTotalOutcome(oddsAttackLoses) }
           { displayOutcomes(oddsAttackLoses) }
         </div>
       </div>

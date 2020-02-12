@@ -161,7 +161,7 @@ describe('RollNode class', () => {
     test('leaf probabilities add up to one', () => {
       const newNode = new RollNode([8, 8]);
       newNode.makeOutcomesTree();
-      const leafProbabilities = newNode.leafProbabilities;
+      const leafProbabilities = newNode.getLeafProbabilities();
       const reduceLeaf = RollNode.reduceOutcomes(leafProbabilities);
       // console.log(reduceLeaf);
       expect(reduceLeaf.length).toBe(16);
