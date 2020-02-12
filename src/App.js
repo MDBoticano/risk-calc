@@ -23,10 +23,10 @@ const App = () => {
 
     const rollTree = new RollNode([numAttackers, numDefenders]);
     const treeLeafOdds = rollTree.getOdds();
-    console.log(treeLeafOdds);
+    // console.log(treeLeafOdds);
 
-    console.log('Keys:', Object.keys(treeLeafOdds));
-    console.log('Values:', Object.values(treeLeafOdds));
+    // console.log('Keys:', Object.keys(treeLeafOdds));
+    // console.log('Values:', Object.values(treeLeafOdds));
 
     const oddsKeys = Object.keys(treeLeafOdds);
     const oddsValues = Object.values(treeLeafOdds);
@@ -37,11 +37,9 @@ const App = () => {
     for (let i = 0; i < oddsKeys.length; i++) {
       const oddsObject = {};
       oddsObject[oddsKeys[i]] = oddsValues[i];
-      if (oddsKeys[i][0] !== '0') {
-        // setOddsAttackWins([...oddsAttackWins, oddsObject ]);
+      if (oddsKeys[i][0] !== '0') { 
         attackWins.push(oddsObject);
       } else {
-        // setOddsAttackLoses([...oddsAttackLoses, oddsObject ]);
         attackLoses.push(oddsObject);
       }
     }
@@ -57,6 +55,19 @@ const App = () => {
     setNumDefenders(0);
   };
   
+  const displayOutcomes = (outcomeArray) => {
+    const displayedOutcomes = outcomeArray.map((outcome) => {
+      return (
+        <div key={Object.keys(outcome)[0]}>
+          <p>{Object.keys(outcome)[0]}</p>
+          <p>{((Object.values(outcome)[0])*100).toFixed(2)}</p>
+        </div>
+      );
+    });
+
+    return displayedOutcomes;
+  };
+
   return (
     <div className="App">
       <form onSubmit={(event) => calculateOdds(event)}>
@@ -76,8 +87,15 @@ const App = () => {
         <button type="submit">Calculate Odds</button>
       </form>
       
-      <div>
-        {/* {odds} */}
+      <div className="outcomesTable">
+        <div className="outcomesTable__wins">
+          <p>Attack Wins</p>
+          { displayOutcomes(oddsAttackWins) }
+        </div>
+        <div className="outcomesTable__losses">
+          <p>Attack Loses</p>
+          { displayOutcomes(oddsAttackLoses) }
+        </div>
       </div>
     </div>
   );
