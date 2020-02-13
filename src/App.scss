@@ -1,4 +1,37 @@
+body {
+  background-color: salmon;
+}
+
+.App {
+  margin: 2rem;
+  padding: 1rem;
+
+  background-color: white;
+
+  font-size: 1.5rem;
+}
+
+.inputsForm {
+  &__input {
+    display: grid;
+    grid-gap: 0.25rem 0.5rem;
+    grid-template-columns: 8ch 3ch;
+  }
+
+  button {
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
 .outcomesTable {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  &__outcomeItem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
