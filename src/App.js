@@ -34,11 +34,11 @@ const App = () => {
     setOddsAttackLoses(attackLoses);
   };
 
-  const resetForm = () => {
-    setNumAttackers(0);
-    setNumDefenders(0);
-    setModifiers({ defender: "" });
-  };
+  // const resetForm = () => {
+  //   setNumAttackers(0);
+  //   setNumDefenders(0);
+  //   setModifiers({ defender: "" });
+  // };
   
   const displayOutcomes = (outcomeArray) => {
     const displayedOutcomes = outcomeArray.map((outcome) => {
@@ -74,42 +74,6 @@ const App = () => {
 
   return (
     <div className="App">
-      <form className="inputsForm" onSubmit={(event) => calculateOdds(event)}>
-
-        <div className="inputsForm__troopsCount">
-          <h2>Troops</h2>
-          <div className="inputsForm__input">
-            <label htmlFor="numAttackers">Attackers</label>
-            <input
-              type="number" name="numAttackers" min="1" max="99"
-              value={numAttackers} placeholder="0" required
-              onChange={(event) => setNumAttackers(event.target.value)}
-            />
-
-            <label htmlFor="numDefenders">Defenders</label>
-            <input
-              type="number" name="numDefenders" min="1" max="99"
-              value={numDefenders} placeholder="0" required
-              onChange={(event) => setNumDefenders(event.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="inputsForm__modifiers">
-          <h2>Modifiers</h2>
-          <label htmlFor="defenderModifiers">Defenders Scar:</label>
-          <select onChange={(event) => modifyModifiers(event.target.value)}>
-            <option value="n/a">none</option>
-            <option value="bunker">Bunker</option>
-            <option value="ammoShortage">Ammo Shortage</option>
-          </select>
-        
-        </div>
-
-        <button type="reset" onClick={() => resetForm()}>Reset</button>
-        <button type="submit">Calculate Odds</button>
-      </form>
-      
       <div className="outcomesTable">
         <div className="outcomesTable__wins">
           <p>Attack Wins</p>
@@ -122,6 +86,41 @@ const App = () => {
           { displayOutcomes(oddsAttackLoses) }
         </div>
       </div>
+
+      <form className="inputsForm" onSubmit={(event) => calculateOdds(event)}>
+        <div className="inputsForm__section troopsCount">
+          <p className="inputsForm__sectionLabel">Troops</p>
+          <div className="inputsForm__input">
+            <label htmlFor="numAttackers">Attackers</label>
+            <input
+              type="number" name="numAttackers" min="1" max="15"
+              value={numAttackers} placeholder="0" required
+              onChange={(event) => setNumAttackers(event.target.value)}
+            />
+
+            <label htmlFor="numDefenders">Defenders</label>
+            <input
+              type="number" name="numDefenders" min="1" max="15"
+              value={numDefenders} placeholder="0" required
+              onChange={(event) => setNumDefenders(event.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="inputsForm__section modifiers">
+          <p className="inputsForm__sectionLabel">Modifiers</p>
+          <label htmlFor="defenderModifiers">Defenders Scar:</label>
+          <select onChange={(event) => modifyModifiers(event.target.value)}>
+            <option value="n/a">none</option>
+            <option value="bunker">Bunker</option>
+            <option value="ammoShortage">Ammo Shortage</option>
+          </select>
+        </div>
+
+        <button className="inputsForm__submit" type="submit">
+          Calculate Odds
+        </button>
+      </form>
     </div>
   );
 };
