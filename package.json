@@ -1,5 +1,6 @@
 {
   "name": "risk-calc",
+  "homepage": "https://mdboticano.github.io/risk-calc",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
