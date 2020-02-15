@@ -35,30 +35,48 @@ const App = () => {
     setOddsAttackWins(attackWins);
     setOddsAttackLoses(attackLoses);
   };
-  
+
+  const formatPercent = (decimal) => {
+    const number = parseFloat(decimal) * 100;
+    return `${number.toFixed(2)}%`;
+  };
+
+  const displayTotalOutcome = (outcomeArray, label) => {
+    let probabilitiesSum = "--";
+    if (outcomeArray.length > 0) {
+      probabilitiesSum = outcomeArray.map((outcome) => outcome.probability)
+        .reduce((a,b) => a + b)
+      probabilitiesSum = formatPercent(probabilitiesSum);
+    } 
+    return (
+      <>
+        <p className="outcomesTable__columnLabel">{label}</p>
+        <p className="outcomesTable__columnTotal">
+          {probabilitiesSum}
+        </p>
+      </>
+    );
+  };
+
   const displayOutcomes = (outcomeArray) => {
     const displayedOutcomes = outcomeArray.map((outcome) => {
       return (
         <div className="outcomesTable__outcomeItem" key={outcome.outcome}>
           <p>{outcome.outcome}</p>
-          <p>{((outcome.probability)*100).toFixed(2)}</p>
+          <p>{formatPercent(outcome.probability)}</p>
         </div>
       );
     });
 
     return (
       <ul className="outcomesTable__outcomesList">
+        <div className="outcomesTable__outcomeItemLabel">
+          <p>Outcome</p>
+          <p>Probability</p>
+        </div>
         {displayedOutcomes}
       </ul>
     );
-  };
-
-  const displayTotalOutcome = (outcomeArray) => {
-    if (outcomeArray.length <= 0) { return 0; }
-    const probabilitiesSum = outcomeArray.map((outcome) => outcome.probability)
-      .reduce((a,b) => a + b)
-      .toFixed(2);
-    return probabilitiesSum;
   };
 
   // Only works for defenders for now
@@ -70,16 +88,18 @@ const App = () => {
 
   return (
     <div className="App">
+      <header className="appHeader">
+        <p className="appHeader__title">Risk Legacy</p>
+        <p className="appHeader__subtitle">Battle Odds Calculator</p>
+      </header>
 
       <div className="outcomesTable">
-        <div className="outcomesTable__wins">
-          <p>Attack Wins</p>
-          { displayTotalOutcome(oddsAttackWins) }
+        <div className="outcomesTable__column">
+          { displayTotalOutcome(oddsAttackWins, "Attacker Wins") }
           { displayOutcomes(oddsAttackWins) }
         </div>
-        <div className="outcomesTable__losses">
-          <p>Attack Loses</p>
-          { displayTotalOutcome(oddsAttackLoses) }
+        <div className="outcomesTable__column">
+          { displayTotalOutcome(oddsAttackLoses, "Attacker Loses") }
           { displayOutcomes(oddsAttackLoses) }
         </div>
       </div>
@@ -138,7 +158,7 @@ const App = () => {
           </div>
         </div>
 
-        <button className="inputsForm__submit" type="submit">
+        <button className="inputsForm__submit" type="submit" autoFocus>
           Calculate
         </button>
       </form>

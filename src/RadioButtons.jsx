@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const RadioButton = styled.button`
   appearance: none;
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
   border: solid 1px ${props => props.selected ? `blue` : `grey`};
   color: ${props => props.selected ? `blue` : `grey` };
 
@@ -11,6 +12,14 @@ const RadioButton = styled.button`
   &:hover {
     text-decoration: underline;
     outline: thin;
+  }
+
+  &:first-child {
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+
+  &:last-child {
+    border-radius: 0 0.25rem 0.25rem 0;
   }
 `;
 
