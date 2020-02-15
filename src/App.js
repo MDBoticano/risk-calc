@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './App.scss';
 
+import { RadioButtons } from './RadioButtons';
+
 import { 
   RollNode,
 } from './utilities/RollNode';
 
 const App = () => {
-  const [numAttackers, setNumAttackers] = useState("");
-  const [numDefenders, setNumDefenders] = useState("");
+  const [numAttackers, setNumAttackers] = useState(3);
+  const [numDefenders, setNumDefenders] = useState(2);
   const [modifiers, setModifiers] = useState({ defender: "" });
 
   const [oddsAttackWins, setOddsAttackWins] = useState([]);
@@ -33,12 +35,6 @@ const App = () => {
     setOddsAttackWins(attackWins);
     setOddsAttackLoses(attackLoses);
   };
-
-  // const resetForm = () => {
-  //   setNumAttackers(0);
-  //   setNumDefenders(0);
-  //   setModifiers({ defender: "" });
-  // };
   
   const displayOutcomes = (outcomeArray) => {
     const displayedOutcomes = outcomeArray.map((outcome) => {
@@ -74,6 +70,7 @@ const App = () => {
 
   return (
     <div className="App">
+
       <div className="outcomesTable">
         <div className="outcomesTable__wins">
           <p>Attack Wins</p>
@@ -88,37 +85,61 @@ const App = () => {
       </div>
 
       <form className="inputsForm" onSubmit={(event) => calculateOdds(event)}>
-        <div className="inputsForm__section troopsCount">
+        <div className="inputsForm__section troopCount">
           <p className="inputsForm__sectionLabel">Troops</p>
-          <div className="inputsForm__input">
-            <label htmlFor="numAttackers">Attackers</label>
-            <input
-              type="number" name="numAttackers" min="1" max="15"
-              value={numAttackers} placeholder="0" required
-              onChange={(event) => setNumAttackers(event.target.value)}
-            />
+          <div className="troopsInput">
 
-            <label htmlFor="numDefenders">Defenders</label>
-            <input
-              type="number" name="numDefenders" min="1" max="15"
-              value={numDefenders} placeholder="0" required
-              onChange={(event) => setNumDefenders(event.target.value)}
-            />
+          <div className="inputsForm__input troopsInput__rowItem">
+            <label className="inputsForm__inputLabel" htmlFor="numAttackers">
+              Attackers
+            </label>
+            <div className="inputsForm__inputField">
+              <input
+                type="number" required
+                name="numAttackers" id="numAttackers"
+                min="1" max="15"
+                value={numAttackers} placeholder="0"
+                onChange={(event) => setNumAttackers(event.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="inputsForm__input troopsInput__rowItem">
+            <label className="inputsForm__inputLabel" htmlFor="numDefenders">
+              Defenders
+            </label>
+            <div className="inputsForm__inputField">
+              <input
+                type="number" required
+                name="numDefenders" id="numDefenders"
+                min="1" max="15"
+                value={numDefenders} placeholder="0"
+                onChange={(event) => setNumDefenders(event.target.value)}
+              />
+            </div>
+          </div>
           </div>
         </div>
 
-        <div className="inputsForm__section modifiers">
+        <div className="inputsForm__section">
           <p className="inputsForm__sectionLabel">Modifiers</p>
-          <label htmlFor="defenderModifiers">Defenders Scar:</label>
-          <select onChange={(event) => modifyModifiers(event.target.value)}>
-            <option value="n/a">none</option>
-            <option value="bunker">Bunker</option>
-            <option value="ammoShortage">Ammo Shortage</option>
-          </select>
+          <div className="inputsForm__input">
+            <label htmlFor="defenderModifiers">Territory Scar</label>
+            <div className="inputsForm__inputField">
+              <RadioButtons
+                buttons={[
+                  { value: "", label: "None" },
+                  { value: "bunker", label: "Bunker" },
+                  { value: "ammoShortage", label: "Ammo Shortage" },
+                ]}
+                callback={modifyModifiers}
+              />
+            </div>
+          </div>
         </div>
 
         <button className="inputsForm__submit" type="submit">
-          Calculate Odds
+          Calculate
         </button>
       </form>
     </div>
